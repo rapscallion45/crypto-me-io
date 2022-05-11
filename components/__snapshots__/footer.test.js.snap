@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Renders correctly enzyme 1`] = `
+<ForwardRef(Box)
+  component="footer"
+  sx={
+    Object {
+      "backgroundColor": [Function],
+      "mt": "auto",
+      "px": 2,
+      "py": 3,
+      "zIndex": 2,
+    }
+  }
+>
+  <ForwardRef(Container)
+    maxWidth="sm"
+  >
+    <ForwardRef(Typography)
+      align="center"
+      color="text.primary"
+      variant="body1"
+    >
+      This is a test application intended for demonstration purposes only.
+    </ForwardRef(Typography)>
+    <Copyright />
+  </ForwardRef(Container)>
+</ForwardRef(Box)>
+`;

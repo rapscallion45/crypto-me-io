@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`_app Renders correctly enzyme 1`] = `
+<Provider
+  store={
+    Object {
+      "@@observable": [Function],
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Themeconfig
+    emotionCache={
+      Object {
+        "insert": [Function],
+        "inserted": Object {},
+        "key": "css",
+        "nonce": undefined,
+        "registered": Object {},
+        "sheet": StyleSheet {
+          "_insertTag": [Function],
+          "before": null,
+          "container": <head />,
+          "ctr": 0,
+          "insertionPoint": undefined,
+          "isSpeedy": false,
+          "key": "css",
+          "nonce": undefined,
+          "prepend": undefined,
+          "tags": Array [],
+        },
+      }
+    }
+  >
+    <Layout />
+  </Themeconfig>
+</Provider>
+`;
