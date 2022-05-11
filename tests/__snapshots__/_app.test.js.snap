@@ -35,6 +35,7 @@ exports[`_app Renders correctly enzyme 1`] = `
       }
     }
   >
+    <Meta />
     <Layout />
   </Themeconfig>
 </Provider>

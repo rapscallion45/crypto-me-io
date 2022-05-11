@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout/layout';
 import { useStore } from '../utils/store';
 import ThemeConfig from '../theme/ThemeConfig';
 import createEmotionCache from '../utils/createEmotionCache';
+import Meta from '../components/meta';
 
 /* Client-side cache, shared for the whole session of the user in the browser */
 const clientSideEmotionCache = createEmotionCache();
@@ -14,6 +15,7 @@ const App = function App({ Component, emotionCache = clientSideEmotionCache, pag
   return (
     <Provider store={store}>
       <ThemeConfig emotionCache={emotionCache}>
+        <Meta />
         <PageLayout>{Component && <Component {...pageProps} />}</PageLayout>
       </ThemeConfig>
     </Provider>
