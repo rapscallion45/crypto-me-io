@@ -31,7 +31,7 @@ const serverMockHandlers = [
     res(ctx.status(200), ctx.json(currencyTickerDataMock))
   ),
   /* Test/mock get trending currency data */
-  rest.get(`${CG_API_URL}/search/trending`, async (req, res, ctx) =>
+  rest.get(`${CG_API_URL}/coins/markets`, async (req, res, ctx) =>
     res(ctx.status(200), ctx.json(trendingCurrenciesDataMock))
   ),
   /* Test/mock get global currency data */

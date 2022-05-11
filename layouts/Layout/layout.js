@@ -17,6 +17,9 @@ import Loader from '../../components/loader';
 import MHidden from '../../components/m-hidden';
 import conf from '../../utils/particlesConf';
 import userActions from '../../redux/actions/actions';
+import numberWithCommas from '../../utils/numberWithCommas';
+import getObjMaxProp from '../../utils/getObjMaxProp';
+import getObjKeyByValue from '../../utils/getObjKeyByValue';
 
 const Layout = function Layout({ children }) {
   const dispatch = useDispatch();
@@ -31,6 +34,13 @@ const Layout = function Layout({ children }) {
   };
 
   const particlesLoaded = () => {};
+
+  const getDominantCurrency = (currencies) => {
+    if (!currencies) return 0;
+    const max = getObjMaxProp(currencies);
+    const name = getObjKeyByValue(currencies, max);
+    return `${name.toUpperCase()} ${max.toFixed(1)}%`;
+  };
 
   return (
     <Box
@@ -55,7 +65,7 @@ const Layout = function Layout({ children }) {
                 dataLoading={currencyData.loading}
                 dataError={currencyData.error}
               >
-                <Typography variant="body2" color="text.primary">
+                <Typography variant="body3" color="text.primary">
                   Coins:{' '}
                   <Link
                     variant="button"
@@ -66,7 +76,7 @@ const Layout = function Layout({ children }) {
                     {currencyData.data?.active_cryptocurrencies}
                   </Link>
                 </Typography>
-                <Typography ml={1} variant="body2" color="text.primary">
+                <Typography ml={1} variant="body3" color="text.primary">
                   Markets:{' '}
                   <Link
                     variant="button"
@@ -77,26 +87,48 @@ const Layout = function Layout({ children }) {
                     {currencyData.data?.markets}
                   </Link>
                 </Typography>
-                <Typography ml={1} variant="body2" color="text.primary">
-                  Coins:{' '}
+                <Typography ml={1} variant="body3" color="text.primary">
+                  Market Cap:{' '}
                   <Link
                     variant="button"
                     color="primary.main"
                     href="/"
                     sx={{ my: 1, fontWeight: '900' }}
                   >
-                    {currencyData.data?.active_cryptocurrencies}
+                    ${numberWithCommas(currencyData.data?.total_market_cap?.usd.toFixed(0))}
                   </Link>
                 </Typography>
-                <Typography ml={1} mr={6} variant="body2" color="text.primary">
-                  Top Market Share:{' '}
+                <Typography
+                  variant="body2"
+                  color={
+                    currencyData.data?.market_cap_change_percentage_24h_usd >= 0
+                      ? 'success'
+                      : 'error'
+                  }
+                  sx={{ marginLeft: '5px' }}
+                >
+                  {currencyData.data?.market_cap_change_percentage_24h_usd.toFixed(1)}%
+                </Typography>
+                <Typography ml={1} variant="body3" color="text.primary">
+                  24h Vol:{' '}
                   <Link
                     variant="button"
                     color="primary.main"
                     href="/"
                     sx={{ my: 1, fontWeight: '900' }}
                   >
-                    {currencyData.data?.active_cryptocurrencies}
+                    ${numberWithCommas(currencyData.data?.total_volume?.usd.toFixed(0))}
+                  </Link>
+                </Typography>
+                <Typography ml={1} mr={6} variant="body3" color="text.primary">
+                  Dominant:{' '}
+                  <Link
+                    variant="button"
+                    color="primary.main"
+                    href="/"
+                    sx={{ my: 1, fontWeight: '900' }}
+                  >
+                    {getDominantCurrency(currencyData.data?.market_cap_percentage)}
                   </Link>
                 </Typography>
               </Loader>
