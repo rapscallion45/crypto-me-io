@@ -6,7 +6,7 @@ The app is built on Next.js, employing Redux for state management. The app has b
 
 ## Project Link
 
-This app is live at: [cryptome.io.vercel.app/](https://cryptome.io.vercel.app/)
+This app is live at: [crypto-me-io.vercel.app/](https://crypto-me-io.vercel.app/)
 
 ## Project Status
 
