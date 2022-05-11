@@ -1,16 +1,16 @@
-# Intandem Users example
+# Crypto Me cryptocurrency tracker
 
-This is an example app demonstrating user data fetching from a rest API endpoint. User creation, modification and deletion functionality is included, and simulated server responses are handled.
+This is an example app demonstrating cryptocurrency data fetching from a rest API endpoint. Cryptocurrency data is displayed in avarious formats for price tracking.
 
-The app is built on Next.js, employing Redux for state management. The app has been styled using MUI v5. The user data is collected from the free, open source rest API [reqres.in](https://reqres.in).
+The app is built on Next.js, employing Redux for state management. The app has been styled using MUI v5. The crytocurrency data is collected from the free, open source rest API [coingecko.com](https://www.coingecko.com). API docs can be found [here](https://www.coingecko.com/en/api/documentation).
 
 ## Project Link
 
-This demonstration app is live at: [https://intandem-users.vercel.app/](https://intandem-users.vercel.app/)
+This app is live at: [cryptome.io.vercel.app/](https://cryptome.io.vercel.app/)
 
 ## Project Status
 
-This project is currently in development, as it is intended only as a demonstration.
+This project is currently in development.
 
 ## Installation and Setup
 
