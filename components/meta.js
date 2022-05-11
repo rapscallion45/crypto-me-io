@@ -19,11 +19,6 @@ const Meta = function Meta() {
         rel="stylesheet"
       />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <link href="/css/hamburgers.css" rel="stylesheet" />
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"
-      />
     </Head>
   );
 };
