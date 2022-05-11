@@ -6,10 +6,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from './link';
 
-const BoxStyle = styled(Box)(() => ({
+const BoxStyle = styled(Box)(({ theme }) => ({
   marginTop: '7px',
-  width: 400,
-  height: 210,
+  maxWidth: 300,
+  height: 160,
+  [theme.breakpoints.up('sm')]: {
+    maxWidth: 500,
+    height: 210,
+  },
 }));
 
 const Hero = function Hero() {
