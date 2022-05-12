@@ -54,7 +54,7 @@ const Layout = function Layout({ children }) {
     >
       <CssBaseline />
       <Box sx={{ flexGrow: 1, maxHeight: 80 }}>
-        <AppBar position="sticky" color="secondary">
+        <AppBar position="fixed" color="secondary">
           <Toolbar variant="dense">
             <Link href="/" sx={{ mr: 5 }}>
               <Logo />
@@ -151,7 +151,7 @@ const Layout = function Layout({ children }) {
           </Toolbar>
         </AppBar>
       </Box>
-      {children}
+      <Box sx={{ mt: 8 }}>{children}</Box>
       <Particles id="tsparticles" init={particlesInit} loaded={particlesLoaded} options={conf} />
       <Footer />
     </Box>

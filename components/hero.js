@@ -24,7 +24,7 @@ const Hero = function Hero() {
       </Box>
 
       <Typography variant="h3" align="center" color="secondary.main" paragraph>
-        Track, buy and sell your crypto with ease!
+        Find and track all your favourite cryptos with ease!
       </Typography>
       <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
         <Button variant="contained" component={Link} href="/register">

@@ -40,6 +40,15 @@ function getCurrencyTicker(query) {
   ).then(handleResponse);
 }
 
+function getAllCurrencies() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  return fetch(`/api/all-currencies`, requestOptions).then(handleResponse);
+}
+
 function getTrendingCurrencies() {
   const requestOptions = {
     method: 'GET',
@@ -60,6 +69,7 @@ function getGlobalCurrencyData() {
 
 const services = {
   getCurrencyTicker,
+  getAllCurrencies,
   getTrendingCurrencies,
   getGlobalCurrencyData,
 };

@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AliceCarousel from 'react-alice-carousel';
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from './link';
 import Loader from './loader';
-import userActions from '../redux/actions/actions';
+import currencyActions from '../redux/actions/actions';
 import numberWithCommas from '../utils/numberWithCommas';
 
 const CarouselItem = styled(Link)({
@@ -48,32 +47,30 @@ const CurrencyCarousel = function CurrencyCarousel() {
   });
 
   useEffect(() => {
-    dispatch(userActions.getTrendingCurrencies());
+    dispatch(currencyActions.getTrendingCurrencies());
   }, []);
 
   return (
-    <Box mt={12} mb={12}>
-      <Loader
-        dataLoading={trendingCurrencies.loading}
-        dataLoaded={trendingCurrencies.loaded}
-        dataError={trendingCurrencies.error}
-        loadingText="Loading currencies..."
-        errorText="Failed to load curreny data."
-        color="secondary"
-      >
-        <AliceCarousel
-          mouseTracking
-          infinite
-          autoPlay
-          autoPlayInterval={1000}
-          animationDuration={1500}
-          disableDotsControls
-          disableButtonsControls
-          responsive={responsive}
-          items={items}
-        />
-      </Loader>
-    </Box>
+    <Loader
+      dataLoading={trendingCurrencies.loading}
+      dataLoaded={trendingCurrencies.loaded}
+      dataError={trendingCurrencies.error}
+      loadingText="Loading currencies..."
+      errorText="Failed to load curreny data."
+      color="secondary"
+    >
+      <AliceCarousel
+        mouseTracking
+        infinite
+        autoPlay
+        autoPlayInterval={1000}
+        animationDuration={1500}
+        disableDotsControls
+        disableButtonsControls
+        responsive={responsive}
+        items={items}
+      />
+    </Loader>
   );
 };
 
