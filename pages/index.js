@@ -2,7 +2,7 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Hero from '../components/hero';
 import Page from '../components/page';
-import Currencies from '../components/currencies';
+import CurrencyCarousel from '../components/currency-carousel';
 import Layout from '../layouts/Layout/layout';
 
 const Index = function Index() {
@@ -19,7 +19,7 @@ const Index = function Index() {
         >
           <Hero />
         </Box>
-        <Currencies />
+        <CurrencyCarousel />
       </Container>
     </Page>
   );

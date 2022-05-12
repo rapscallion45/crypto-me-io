@@ -18,7 +18,7 @@ const CarouselItem = styled(Link)({
   color: 'white',
 });
 
-const Currencies = function Currencies() {
+const CurrencyCarousel = function CurrencyCarousel() {
   const dispatch = useDispatch();
   const trendingCurrencies = useSelector((state) => state.trendingCurrencies);
   const responsive = {
@@ -59,6 +59,7 @@ const Currencies = function Currencies() {
         dataError={trendingCurrencies.error}
         loadingText="Loading currencies..."
         errorText="Failed to load curreny data."
+        color="secondary"
       >
         <AliceCarousel
           mouseTracking
@@ -76,4 +77,4 @@ const Currencies = function Currencies() {
   );
 };
 
-export default Currencies;
+export default CurrencyCarousel;

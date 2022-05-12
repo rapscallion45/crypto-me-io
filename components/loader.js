@@ -11,15 +11,16 @@ const Loader = function Loader({
   loadingText,
   errorText,
   children,
+  color = 'primary',
 }) {
   return (
     <>
       {dataLoading && (
         <>
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <CircularProgress color="primary" size={30} />
+            <CircularProgress color={color} size={30} />
           </Box>
-          <Typography variant="h6" align="center" mt={1}>
+          <Typography variant="h6" align="center" mt={1} color={color}>
             {loadingText}
           </Typography>
         </>
@@ -29,7 +30,7 @@ const Loader = function Loader({
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <WarningIcon color="error" size={30} />
           </Box>
-          <Typography variant="h6" align="center" mt={1}>
+          <Typography variant="h6" align="center" mt={1} color={color}>
             {errorText}
           </Typography>
         </>
@@ -46,6 +47,7 @@ Loader.propTypes = {
   loadingText: PropTypes.string,
   errorText: PropTypes.string,
   children: PropTypes.node.isRequired,
+  color: PropTypes.string,
 };
 
 export default Loader;
