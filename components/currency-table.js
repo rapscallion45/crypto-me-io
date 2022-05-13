@@ -249,8 +249,8 @@ TablePaginationActions.propTypes = {
 const CurrencyTable = function CurrencyTable({ perPage = 10 }) {
   const dispatch = useDispatch();
   const { loading, error, loaded, data } = useSelector((state) => state.allCurrencies);
-  const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('calories');
+  const [order, setOrder] = useState('desc');
+  const [orderBy, setOrderBy] = useState('market_cap');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(perPage);
 
