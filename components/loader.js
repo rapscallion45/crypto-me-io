@@ -16,18 +16,24 @@ const Loader = function Loader({
   return (
     <>
       {dataLoading && (
-        <>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignContent="middle"
+          flexDirection="column"
+          sx={{ height: '100%' }}
+        >
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress color={color} size={30} />
           </Box>
           <Typography variant="h6" align="center" mt={1} color={color}>
             {loadingText}
           </Typography>
-        </>
+        </Box>
       )}
       {dataError && !dataLoaded && (
         <>
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignContent: 'middle' }}>
             <WarningIcon color="error" size={30} />
           </Box>
           <Typography variant="h6" align="center" mt={1} color={color}>

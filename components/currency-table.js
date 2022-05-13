@@ -23,6 +23,7 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import Loader from './loader';
+import Link from './link';
 import currencyActions from '../redux/actions/actions';
 import numberwithcommas from '../utils/numberWithCommas';
 
@@ -73,25 +74,37 @@ const headCells = [
     id: 'price_change_percentage_1h_in_currency',
     numeric: true,
     disablePadding: true,
-    label: '1h',
+    label: 'Δ1h',
   },
   {
     id: 'price_change_percentage_24h',
     numeric: true,
     disablePadding: true,
-    label: '24h',
+    label: 'Δ24h',
   },
   {
     id: 'price_change_percentage_7d_in_currency',
     numeric: true,
     disablePadding: true,
-    label: '7d',
+    label: 'Δ7d',
   },
   {
     id: 'price_change_percentage_30d_in_currency',
     numeric: true,
     disablePadding: true,
-    label: '30d',
+    label: 'Δ30d',
+  },
+  {
+    id: 'circulating_supply',
+    numeric: true,
+    disablePadding: true,
+    label: 'Circulating Supply',
+  },
+  {
+    id: 'total_supply',
+    numeric: true,
+    disablePadding: true,
+    label: 'Total Supply',
   },
   {
     id: 'market_cap',
@@ -257,13 +270,23 @@ const CurrencyTable = function CurrencyTable() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+      <Paper
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          width: '100%',
+          mb: 2,
+          minHeight: '300px',
+        }}
+      >
         <Loader
           dataLoading={loading}
           dataError={error}
           dataLoaded={loaded}
-          loadingText="Loading coin data..."
-          errorText="Failed to load coin data."
+          loadingText="Loading currency data..."
+          errorText="Failed to load currency data."
+          color="primary"
         >
           <CurrencyTableToolbar />
           <TableContainer>
@@ -289,27 +312,40 @@ const CurrencyTable = function CurrencyTable() {
                           id={labelId}
                           scope="row"
                           padding="none"
-                          width="200px"
+                          sx={{ width: '250px' }}
                         >
-                          <Box display="flex" sx={{ width: '180px', px: 1 }}>
+                          <Box
+                            component={Link}
+                            href={`/currencies/${row.id}`}
+                            display="flex"
+                            sx={{ width: '180px', px: 1 }}
+                            underline="none"
+                          >
                             <img
+                              loading="lazy"
                               alt={row.name}
                               src={row.image}
                               height={50}
+                              width={50}
                               style={{ marginRight: 10 }}
                             />
                             <Box display="flex" flexDirection="column">
-                              <Typography noWrap variant="h6">
+                              <Typography noWrap variant="h6" sx={{ width: '170px' }} color="black">
                                 {row.name}
                               </Typography>
-                              <Typography noWrap variant="body" sx={{ textTransform: 'uppercase' }}>
+                              <Typography
+                                noWrap
+                                variant="body"
+                                color="black"
+                                sx={{ textTransform: 'uppercase' }}
+                              >
                                 {row.symbol}
                               </Typography>
                             </Box>
                           </Box>
                         </TableCell>
                         <TableCell align="right">
-                          ${numberwithcommas(row.current_price.toFixed(2))}
+                          ${numberwithcommas(row.current_price?.toFixed(2))}
                         </TableCell>
                         <TableCell align="right">
                           <Typography
@@ -321,7 +357,7 @@ const CurrencyTable = function CurrencyTable() {
                             }
                           >
                             {row.price_change_percentage_1h_in_currency >= 0 && '+'}
-                            {row.price_change_percentage_1h_in_currency.toFixed(1)}%
+                            {row.price_change_percentage_1h_in_currency?.toFixed(1)}%
                           </Typography>
                         </TableCell>
                         <TableCell align="right">
@@ -332,7 +368,7 @@ const CurrencyTable = function CurrencyTable() {
                             }
                           >
                             {row.price_change_percentage_24h >= 0 && '+'}
-                            {row.price_change_percentage_24h.toFixed(1)}%
+                            {row.price_change_percentage_24h?.toFixed(1)}%
                           </Typography>
                         </TableCell>
                         <TableCell align="right">
@@ -345,7 +381,7 @@ const CurrencyTable = function CurrencyTable() {
                             }
                           >
                             {row.price_change_percentage_7d_in_currency >= 0 && '+'}
-                            {row.price_change_percentage_7d_in_currency.toFixed(1)}%
+                            {row.price_change_percentage_7d_in_currency?.toFixed(1)}%
                           </Typography>
                         </TableCell>
                         <TableCell align="right">
@@ -358,12 +394,18 @@ const CurrencyTable = function CurrencyTable() {
                             }
                           >
                             {row.price_change_percentage_30d_in_currency >= 0 && '+'}
-                            {row.price_change_percentage_30d_in_currency.toFixed(1)}%
+                            {row.price_change_percentage_30d_in_currency?.toFixed(1)}%
                           </Typography>
+                        </TableCell>
+                        <TableCell align="right">
+                          {numberwithcommas(row.circulating_supply?.toFixed(0))}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.total_supply ? numberwithcommas(row.total_supply.toFixed(0)) : '∞'}
                         </TableCell>
                         <TableCell align="right" sx={{ px: 2 }}>
                           <Box position="relative">
-                            ${numberwithcommas(row.market_cap.toFixed(0))}
+                            ${numberwithcommas(row.market_cap?.toFixed(0))}
                             <Box position="absolute" sx={{ top: -15, right: -5 }}>
                               <Typography
                                 variant="body4"
@@ -375,7 +417,7 @@ const CurrencyTable = function CurrencyTable() {
                                 }
                               >
                                 {row.market_cap_change_percentage_24h >= 0 && '+'}
-                                {row.market_cap_change_percentage_24h.toFixed(1)}%
+                                {row.market_cap_change_percentage_24h?.toFixed(1)}%
                               </Typography>
                             </Box>
                           </Box>

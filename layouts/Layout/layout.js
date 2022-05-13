@@ -72,6 +72,7 @@ const Layout = function Layout({ children }) {
                     color="primary.main"
                     href="/"
                     sx={{ my: 1, fontWeight: '900' }}
+                    underline="none"
                   >
                     {currencyData.data?.active_cryptocurrencies}
                   </Link>
@@ -83,6 +84,7 @@ const Layout = function Layout({ children }) {
                     color="primary.main"
                     href="/"
                     sx={{ my: 1, fontWeight: '900' }}
+                    underline="none"
                   >
                     {currencyData.data?.markets}
                   </Link>
@@ -94,6 +96,7 @@ const Layout = function Layout({ children }) {
                     color="primary.main"
                     href="/"
                     sx={{ my: 1, fontWeight: '900' }}
+                    underline="none"
                   >
                     ${numberWithCommas(currencyData.data?.total_market_cap?.usd.toFixed(0))}
                   </Link>
@@ -102,11 +105,12 @@ const Layout = function Layout({ children }) {
                   variant="body2"
                   color={
                     currencyData.data?.market_cap_change_percentage_24h_usd >= 0
-                      ? 'success'
+                      ? 'success.main'
                       : 'error'
                   }
                   sx={{ marginLeft: '5px' }}
                 >
+                  {currencyData.data?.market_cap_change_percentage_24h_usd >= 0 && '+'}
                   {currencyData.data?.market_cap_change_percentage_24h_usd.toFixed(1)}%
                 </Typography>
                 <Typography ml={1} variant="body3" color="text.primary">
@@ -116,6 +120,7 @@ const Layout = function Layout({ children }) {
                     color="primary.main"
                     href="/"
                     sx={{ my: 1, fontWeight: '900' }}
+                    underline="none"
                   >
                     ${numberWithCommas(currencyData.data?.total_volume?.usd.toFixed(0))}
                   </Link>
@@ -127,6 +132,7 @@ const Layout = function Layout({ children }) {
                     color="primary.main"
                     href="/"
                     sx={{ my: 1, fontWeight: '900' }}
+                    underline="none"
                   >
                     {getDominantCurrency(currencyData.data?.market_cap_percentage)}
                   </Link>
@@ -136,10 +142,11 @@ const Layout = function Layout({ children }) {
                 <Link
                   variant="button"
                   color="primary.main"
-                  href="/"
+                  href="/currencies/all"
                   sx={{ my: 1, mx: 1.5, fontWeight: '900', textTransform: 'uppercase' }}
+                  underline="none"
                 >
-                  Markets
+                  Currencies
                 </Link>
               </nav>
             </MHidden>

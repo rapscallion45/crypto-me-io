@@ -32,13 +32,14 @@ const CurrencyCarousel = function CurrencyCarousel() {
     const profit = coin.price_change_percentage_24h >= 0;
 
     return (
-      <CarouselItem href="/">
+      <CarouselItem href="/" underline="none">
         <img src={coin?.image} alt={coin?.name} height="80" style={{ marginBottom: '10px' }} />
         <span>
           {coin?.symbol}
           &nbsp;
-          <Typography variant="body" color={profit ? 'success' : 'error'}>
-            {profit && '+'} {coin?.price_change_percentage_24h?.toFixed(2)}%
+          <Typography variant="body" color={profit ? 'success.main' : 'error.main'}>
+            {profit && '+'}
+            {coin?.price_change_percentage_24h?.toFixed(2)}%
           </Typography>
         </span>
         <Typography variant="h4">${numberWithCommas(coin?.current_price?.toFixed(2))}</Typography>

@@ -27,8 +27,8 @@ const Hero = function Hero() {
         Find and track all your favourite cryptos with ease!
       </Typography>
       <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-        <Button variant="contained" component={Link} href="/register">
-          Create Account
+        <Button variant="contained" component={Link} href="/currencies/all">
+          View Currencies
         </Button>
       </Stack>
     </Container>
