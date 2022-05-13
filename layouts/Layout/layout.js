@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 import CssBaseline from '@mui/material/CssBaseline';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -24,6 +27,18 @@ import getObjKeyByValue from '../../utils/getObjKeyByValue';
 const Layout = function Layout({ children }) {
   const dispatch = useDispatch();
   const currencyData = useSelector((state) => state.globalCurrencyData);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handlePopoverOpen = (event) => {
+    if (anchorEl !== event.currentTarget) {
+      setAnchorEl(event.currentTarget);
+    }
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     dispatch(userActions.getGlobalCurrencyData());
@@ -66,11 +81,11 @@ const Layout = function Layout({ children }) {
                 dataError={currencyData.error}
               >
                 <Typography variant="body3" color="text.primary">
-                  Coins:{' '}
+                  Currencies:{' '}
                   <Link
                     variant="button"
                     color="primary.main"
-                    href="/"
+                    href="/currencies/all"
                     sx={{ my: 1, fontWeight: '900' }}
                     underline="none"
                   >
@@ -82,7 +97,7 @@ const Layout = function Layout({ children }) {
                   <Link
                     variant="button"
                     color="primary.main"
-                    href="/"
+                    href="/markets/all"
                     sx={{ my: 1, fontWeight: '900' }}
                     underline="none"
                   >
@@ -94,7 +109,7 @@ const Layout = function Layout({ children }) {
                   <Link
                     variant="button"
                     color="primary.main"
-                    href="/"
+                    href="/currencies/global-charts"
                     sx={{ my: 1, fontWeight: '900' }}
                     underline="none"
                   >
@@ -118,7 +133,7 @@ const Layout = function Layout({ children }) {
                   <Link
                     variant="button"
                     color="primary.main"
-                    href="/"
+                    href="/currencies/high-volume"
                     sx={{ my: 1, fontWeight: '900' }}
                     underline="none"
                   >
@@ -130,7 +145,7 @@ const Layout = function Layout({ children }) {
                   <Link
                     variant="button"
                     color="primary.main"
-                    href="/"
+                    href="/currencies/global-charts"
                     sx={{ my: 1, fontWeight: '900' }}
                     underline="none"
                   >
@@ -139,15 +154,58 @@ const Layout = function Layout({ children }) {
                 </Typography>
               </Loader>
               <nav>
-                <Link
-                  variant="button"
-                  color="primary.main"
-                  href="/currencies/all"
-                  sx={{ my: 1, mx: 1.5, fontWeight: '900', textTransform: 'uppercase' }}
-                  underline="none"
+                <Typography
+                  variant="body"
+                  onMouseOver={handlePopoverOpen}
+                  color="primary"
+                  sx={{
+                    my: 1,
+                    mx: 1.5,
+                    fontWeight: '900',
+                    textTransform: 'uppercase',
+                    cursor: 'pointer',
+                  }}
                 >
-                  Currencies
-                </Link>
+                  Cryptocurrencies
+                </Typography>
+                <Menu
+                  id="cryptocurrencies-nav-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handlePopoverClose}
+                  MenuListProps={{
+                    onMouseLeave: handlePopoverClose,
+                    'aria-labelledby': 'basic-button',
+                  }}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                >
+                  <MenuItem component={Link} href="/currencies/all" onClick={handlePopoverClose}>
+                    All Cryptos
+                  </MenuItem>
+                  <MenuItem component={Link} href="/currencies/all" onClick={handlePopoverClose}>
+                    By Market Cap
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem component={Link} href="/currencies/all" onClick={handlePopoverClose}>
+                    Discover
+                  </MenuItem>
+                  <MenuItem component={Link} href="/currencies/all" onClick={handlePopoverClose}>
+                    Gainers & Losers
+                  </MenuItem>
+                  <MenuItem component={Link} href="/currencies/all" onClick={handlePopoverClose}>
+                    High Volume
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem component={Link} href="/currencies/all" onClick={handlePopoverClose}>
+                    Trending
+                  </MenuItem>
+                  <MenuItem component={Link} href="/currencies/all" onClick={handlePopoverClose}>
+                    Global
+                  </MenuItem>
+                </Menu>
               </nav>
             </MHidden>
             <MHidden width="lgUp">
