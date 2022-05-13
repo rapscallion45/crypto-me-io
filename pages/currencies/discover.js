@@ -14,7 +14,7 @@ const GainersLosers = function GainersLosers() {
             Discover New Currencies
           </Typography>
           <Typography variant="h5" align="center" color="secondary.main" paragraph>
-            Explore trending, recently added and top trending crypto currencies
+            Explore trending, recently added and top trading crypto currencies
           </Typography>
         </Box>
         <Box mt={6} mb={12}>
