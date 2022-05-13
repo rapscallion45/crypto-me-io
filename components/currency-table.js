@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
+import { useTheme, styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -26,6 +26,15 @@ import Loader from './loader';
 import Link from './link';
 import currencyActions from '../redux/actions/actions';
 import numberwithcommas from '../utils/numberWithCommas';
+
+const CurrencyTableSortLabel = styled(TableSortLabel)(() => ({
+  '& .MuiTableSortLabel-iconDirectionDesc': {
+    color: 'white !important',
+  },
+  '& .MuiTableSortLabel-iconDirectionAsc': {
+    color: 'white !important',
+  },
+}));
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -132,11 +141,10 @@ const CurrencyTableHead = function CurrencyTableHead(props) {
             sortDirection={orderBy === headCell.id ? order : false}
             sx={{ padding: '15px' }}
           >
-            <TableSortLabel
+            <CurrencyTableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
-              sx={{ color: 'white' }}
             >
               <Typography variant="h6" color="secondary.main">
                 {headCell.label}
@@ -146,7 +154,7 @@ const CurrencyTableHead = function CurrencyTableHead(props) {
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </Box>
               ) : null}
-            </TableSortLabel>
+            </CurrencyTableSortLabel>
           </TableCell>
         ))}
       </TableRow>
@@ -238,13 +246,13 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-const CurrencyTable = function CurrencyTable() {
+const CurrencyTable = function CurrencyTable({ perPage = 10 }) {
   const dispatch = useDispatch();
   const { loading, error, loaded, data } = useSelector((state) => state.allCurrencies);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(perPage);
 
   useEffect(() => {
     dispatch(currencyActions.getAllCurrencies(page));
@@ -438,7 +446,7 @@ const CurrencyTable = function CurrencyTable() {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[5, 10, 25, 50]}
             component="div"
             count={data?.length}
             rowsPerPage={rowsPerPage}
@@ -451,6 +459,10 @@ const CurrencyTable = function CurrencyTable() {
       </Paper>
     </Box>
   );
+};
+
+CurrencyTable.propTypes = {
+  perPage: PropTypes.number,
 };
 
 export default CurrencyTable;
