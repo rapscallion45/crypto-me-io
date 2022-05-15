@@ -40,13 +40,16 @@ function getCurrencyTicker(query) {
   ).then(handleResponse);
 }
 
-function getAllCurrencies() {
+function getAllCurrencies(page, localCurrency) {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch(`/api/all-currencies`, requestOptions).then(handleResponse);
+  return fetch(
+    `/api/all-currencies?vs_currency=${localCurrency}&page=${page || 1}`,
+    requestOptions
+  ).then(handleResponse);
 }
 
 function getCurrencyById(id) {
@@ -58,13 +61,13 @@ function getCurrencyById(id) {
   return fetch(`/api/currency/${id}`, requestOptions).then(handleResponse);
 }
 
-function getTrendingCurrencies() {
+function getTrendingCurrencies(localCurrency) {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch(`/api/trending`, requestOptions).then(handleResponse);
+  return fetch(`/api/trending?vs_currency=${localCurrency}`, requestOptions).then(handleResponse);
 }
 
 function getGlobalCurrencyData() {

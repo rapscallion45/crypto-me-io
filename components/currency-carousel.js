@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AliceCarousel from 'react-alice-carousel';
+import getSymbolFromCurrency from 'currency-symbol-map';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Link from './link';
@@ -20,6 +21,7 @@ const CarouselItem = styled(Link)({
 const CurrencyCarousel = function CurrencyCarousel() {
   const dispatch = useDispatch();
   const trendingCurrencies = useSelector((state) => state.trendingCurrencies);
+  const { currency } = useSelector((state) => state.localCurrency);
   const responsive = {
     0: {
       items: 2,
@@ -42,14 +44,17 @@ const CurrencyCarousel = function CurrencyCarousel() {
             {coin?.price_change_percentage_24h?.toFixed(2)}%
           </Typography>
         </span>
-        <Typography variant="h4">${numberWithCommas(coin?.current_price?.toFixed(2))}</Typography>
+        <Typography variant="h4">
+          {getSymbolFromCurrency(currency)}
+          {numberWithCommas(coin?.current_price?.toFixed(2))}
+        </Typography>
       </CarouselItem>
     );
   });
 
   useEffect(() => {
-    dispatch(currencyActions.getTrendingCurrencies());
-  }, []);
+    dispatch(currencyActions.getTrendingCurrencies(currency));
+  }, [currency]);
 
   return (
     <Loader

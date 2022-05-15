@@ -26,7 +26,7 @@ function getCurrencyTicker(query) {
 }
 
 /* Get all currency data from endpoint */
-function getAllCurrencies() {
+function getAllCurrencies(page, localCurrency) {
   function request() {
     return { type: types.GETALLCURRENCIES_REQUEST };
   }
@@ -40,7 +40,7 @@ function getAllCurrencies() {
   return (dispatch) => {
     dispatch(request());
 
-    services.getAllCurrencies().then(
+    services.getAllCurrencies(page, localCurrency).then(
       (data) => dispatch(success(data)),
       (error) => {
         dispatch(failure(error.toString()));
@@ -74,7 +74,7 @@ function getCurrencyById(id) {
 }
 
 /* Get latest trending currency data from endpoint */
-function getTrendingCurrencies() {
+function getTrendingCurrencies(localCurrency) {
   function request() {
     return { type: types.GETTRENDINGCURRENCIES_REQUEST };
   }
@@ -88,7 +88,7 @@ function getTrendingCurrencies() {
   return (dispatch) => {
     dispatch(request());
 
-    services.getTrendingCurrencies().then(
+    services.getTrendingCurrencies(localCurrency).then(
       (data) => dispatch(success(data)),
       (error) => {
         dispatch(failure(error.toString()));
@@ -121,11 +121,17 @@ function getGlobalCurrencyData() {
   };
 }
 
+/* Get latest trending currency data from endpoint */
+function updateLocalCurrency(currency) {
+  return { type: types.UPDATELOCALCURRENCY, currency };
+}
+
 const currencyActions = {
   getCurrencyTicker,
   getAllCurrencies,
   getCurrencyById,
   getTrendingCurrencies,
   getGlobalCurrencyData,
+  updateLocalCurrency,
 };
 export default currencyActions;

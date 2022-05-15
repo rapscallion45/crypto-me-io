@@ -21,6 +21,7 @@
     "@mui/styles": "latest",
     "@mui/utils": "^5.7.0",
     "clsx": "^1.1.1",
+    "currency-symbol-map": "^5.0.1",
     "formik": "^2.2.9",
     "html-react-parser": "^1.4.12",
     "lodash": "^4.17.21",

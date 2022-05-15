@@ -9,15 +9,16 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
+import MenuIcon from '@mui/icons-material/Menu';
 import Logo from './logo';
 import Link from './link';
 import Loader from './loader';
 import MHidden from './m-hidden';
+import CurrencySwitcher from './currency-switcher';
 import currencyActions from '../redux/actions/actions';
 import numberWithCommas from '../utils/numberWithCommas';
 import getObjMaxProp from '../utils/getObjMaxProp';
@@ -249,14 +250,21 @@ const Navbar = function Navbar() {
                   </InputAdornment>
                 ),
               }}
+              size="small"
               sx={{ maxWidth: 300 }}
             />
+          </Box>
+          <Box>
+            <CurrencySwitcher />
           </Box>
           <Box>
             <Button variant="contained">Subscribe</Button>
           </Box>
         </MHidden>
         <MHidden width="lgUp">
+          <Box sx={{ flexGrow: 1 }}>
+            <CurrencySwitcher />
+          </Box>
           <IconButton aria-label="open-menu">
             <MenuIcon color="primary" sx={{ fontSize: 30, flexGrow: 1 }} />
           </IconButton>

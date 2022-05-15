@@ -2,14 +2,14 @@ import { getTrendingCurrencies } from '../../lib/api';
 
 export default async function handler(req, res) {
   /* get req params */
-  const { method } = req;
+  const { query, method } = req;
 
   /* determine which request type this is */
   switch (method) {
     case 'GET':
       /* call api */
       try {
-        const response = await getTrendingCurrencies();
+        const response = await getTrendingCurrencies(query);
         const data = await response.json();
 
         /* send back server response */

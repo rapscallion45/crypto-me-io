@@ -111,6 +111,18 @@ const globalCurrencyDataReducer = (state = {}, action) => {
   }
 };
 
+// LOCAL CURRENCY REDUCER
+const localCurrencyReducer = (state = { currency: 'usd' }, action) => {
+  switch (action.type) {
+    case types.UPDATELOCALCURRENCY:
+      return {
+        currency: action.currency,
+      };
+    default:
+      return state;
+  }
+};
+
 // COMBINED REDUCERS
 const reducers = {
   currencyTicker: currencyTickerReducer,
@@ -118,6 +130,7 @@ const reducers = {
   currencyData: currencyDataReducer,
   trendingCurrencies: trendingCurrenciesReducer,
   globalCurrencyData: globalCurrencyDataReducer,
+  localCurrency: localCurrencyReducer,
 };
 
 export default combineReducers(reducers);

@@ -20,7 +20,7 @@ const Index = function Index() {
         >
           <Hero />
         </Box>
-        <Box mt={12} mb={12}>
+        <Box mt={12} mb={12} sx={{ minHeight: 150 }}>
           <CurrencyCarousel />
         </Box>
         <Box mt={12} mb={12}>

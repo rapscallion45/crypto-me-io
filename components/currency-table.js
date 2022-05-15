@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import getSymbolFromCurrency from 'currency-symbol-map';
 import { useTheme, styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -249,14 +250,15 @@ TablePaginationActions.propTypes = {
 const CurrencyTable = function CurrencyTable({ perPage = 10 }) {
   const dispatch = useDispatch();
   const { loading, error, loaded, data } = useSelector((state) => state.allCurrencies);
+  const { currency } = useSelector((state) => state.localCurrency);
   const [order, setOrder] = useState('desc');
   const [orderBy, setOrderBy] = useState('market_cap');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(perPage);
 
   useEffect(() => {
-    dispatch(currencyActions.getAllCurrencies(page));
-  }, []);
+    dispatch(currencyActions.getAllCurrencies(page, currency));
+  }, [currency]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -353,7 +355,8 @@ const CurrencyTable = function CurrencyTable({ perPage = 10 }) {
                           </Box>
                         </TableCell>
                         <TableCell align="right">
-                          ${numberwithcommas(row.current_price?.toFixed(2))}
+                          {getSymbolFromCurrency(currency)}
+                          {numberwithcommas(row.current_price?.toFixed(2))}
                         </TableCell>
                         <TableCell align="right">
                           <Typography
@@ -413,7 +416,8 @@ const CurrencyTable = function CurrencyTable({ perPage = 10 }) {
                         </TableCell>
                         <TableCell align="right" sx={{ px: 2 }}>
                           <Box position="relative">
-                            ${numberwithcommas(row.market_cap?.toFixed(0))}
+                            {getSymbolFromCurrency(currency)}
+                            {numberwithcommas(row.market_cap?.toFixed(0))}
                             <Box position="absolute" sx={{ top: -15, right: -5 }}>
                               <Typography
                                 variant="body4"
