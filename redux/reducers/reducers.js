@@ -45,6 +45,28 @@ const allCurrenciesReducer = (state = {}, action) => {
   }
 };
 
+// CURRENCY DATA REDUCER
+const currencyDataReducer = (state = {}, action) => {
+  switch (action.type) {
+    case types.GETCURRENCYDATABYID_REQUEST:
+      return {
+        loading: true,
+      };
+    case types.GETCURRENCYDATABYID_SUCCESS:
+      return {
+        data: action.currencyData,
+        loaded: true,
+      };
+    case types.GETCURRENCYDATABYID_FAILURE:
+      return {
+        error: action.error,
+        loaded: false,
+      };
+    default:
+      return state;
+  }
+};
+
 // TRENDING CURRENCIES REDUCER
 const trendingCurrenciesReducer = (state = {}, action) => {
   switch (action.type) {
@@ -93,6 +115,7 @@ const globalCurrencyDataReducer = (state = {}, action) => {
 const reducers = {
   currencyTicker: currencyTickerReducer,
   allCurrencies: allCurrenciesReducer,
+  currencyData: currencyDataReducer,
   trendingCurrencies: trendingCurrenciesReducer,
   globalCurrencyData: globalCurrencyDataReducer,
 };

@@ -49,6 +49,30 @@ function getAllCurrencies() {
   };
 }
 
+/* Get all currency data from endpoint */
+function getCurrencyById(id) {
+  function request() {
+    return { type: types.GETCURRENCYDATABYID_REQUEST };
+  }
+  function success(currencyData) {
+    return { type: types.GETCURRENCYDATABYID_SUCCESS, currencyData };
+  }
+  function failure(error) {
+    return { type: types.GETCURRENCYDATABYID_FAILURE, error };
+  }
+
+  return (dispatch) => {
+    dispatch(request());
+
+    services.getCurrencyById(id).then(
+      (data) => dispatch(success(data)),
+      (error) => {
+        dispatch(failure(error.toString()));
+      }
+    );
+  };
+}
+
 /* Get latest trending currency data from endpoint */
 function getTrendingCurrencies() {
   function request() {
@@ -100,6 +124,7 @@ function getGlobalCurrencyData() {
 const currencyActions = {
   getCurrencyTicker,
   getAllCurrencies,
+  getCurrencyById,
   getTrendingCurrencies,
   getGlobalCurrencyData,
 };

@@ -22,6 +22,7 @@
     "@mui/utils": "^5.7.0",
     "clsx": "^1.1.1",
     "formik": "^2.2.9",
+    "html-react-parser": "^1.4.12",
     "lodash": "^4.17.21",
     "next": "latest",
     "prop-types": "^15.7.2",
@@ -34,6 +35,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "simplebar": "^5.3.6",
+    "simplebar-react": "^2.3.7",
     "tsparticles": "^2.0.6",
     "yup": "^0.32.11"
   },

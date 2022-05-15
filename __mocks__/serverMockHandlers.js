@@ -5,6 +5,7 @@ import { rest } from 'msw';
 import currencyTickerDataMock from './currencyTickerDataMock';
 import globalCurrencyDataMock from './globalCurrencyDataMock';
 import trendingCurrenciesDataMock from './trendingCurrenciesDataMock';
+import currencyDataMock from './currencyDataMock';
 
 const { API_URL, CG_API_URL } = process.env;
 
@@ -12,6 +13,10 @@ const serverMockHandlers = [
   /* Test/mock get currency ticker data */
   rest.get('/api/currencies', async (req, res, ctx) =>
     res(ctx.status(200), ctx.json(currencyTickerDataMock))
+  ),
+  /* Test/mock get trending currency data */
+  rest.get(`/api/currency/:id`, async (req, res, ctx) =>
+    res(ctx.status(200), ctx.json(currencyDataMock))
   ),
   /* Test/mock get trending currency data */
   rest.get('/api/trending', async (req, res, ctx) =>
@@ -33,6 +38,10 @@ const serverMockHandlers = [
   /* Test/mock get trending currency data */
   rest.get(`${CG_API_URL}/coins/markets`, async (req, res, ctx) =>
     res(ctx.status(200), ctx.json(trendingCurrenciesDataMock))
+  ),
+  /* Test/mock get trending currency data */
+  rest.get(`${CG_API_URL}/coins/:id`, async (req, res, ctx) =>
+    res(ctx.status(200), ctx.json(currencyDataMock))
   ),
   /* Test/mock get global currency data */
   rest.get(`${CG_API_URL}/global`, async (req, res, ctx) =>

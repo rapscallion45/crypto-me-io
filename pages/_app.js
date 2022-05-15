@@ -5,6 +5,7 @@ import ThemeConfig from '../theme/ThemeConfig';
 import createEmotionCache from '../utils/createEmotionCache';
 import Meta from '../components/meta';
 import 'react-alice-carousel/lib/alice-carousel.css';
+import 'simplebar/dist/simplebar.min.css';
 
 /* Client-side cache, shared for the whole session of the user in the browser */
 const clientSideEmotionCache = createEmotionCache();

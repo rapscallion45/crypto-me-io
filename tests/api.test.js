@@ -2,9 +2,11 @@ import { createMocks } from 'node-mocks-http';
 import getCurrencyTicker from '../pages/api/currencies';
 import getGlobalCurrencyData from '../pages/api/global';
 import getTrendingCurrencies from '../pages/api/trending';
+import getCurrencyById from '../pages/api/currency/[id]';
 import currencyTickerDataMock from '../__mocks__/currencyTickerDataMock';
 import globalCurrencyDataMock from '../__mocks__/globalCurrencyDataMock';
 import trendingCurrenciesDataMock from '../__mocks__/trendingCurrenciesDataMock';
+import currencyDataMock from '../__mocks__/currencyDataMock';
 
 /* eslint-disable no-underscore-dangle */
 const { NOMICS_API_KEY } = process.env;
@@ -29,6 +31,22 @@ describe('API Routes', () => {
 
       expect(res._getStatusCode()).toBe(200);
       expect(JSON.parse(res._getData())).toEqual(expect.objectContaining(currencyTickerDataMock));
+    });
+  });
+
+  describe('GET /api/currency/:id', () => {
+    it('returns expected global data', async () => {
+      const { req, res } = createMocks({
+        method: 'GET',
+        params: {
+          id: 'bitcoin',
+        },
+      });
+
+      await getCurrencyById(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(expect.objectContaining(currencyDataMock));
     });
   });
 

@@ -36,7 +36,7 @@ const AllCurrencies = function AllCurrencies() {
   return (
     <Page title="CryptoMe.io | All Currencies">
       <Container disableGutters maxWidth="lg">
-        <Box mt={5} mb={4}>
+        <Box mt={5} mb={4} mx={2}>
           <Typography variant="h2" align="center" color="secondary.main" paragraph>
             All Cryptocurrencies
           </Typography>
@@ -51,9 +51,9 @@ const AllCurrencies = function AllCurrencies() {
             justifyContent="center"
             sx={{
               textAlign: 'center',
-              width: '100%',
               mt: 2,
               mb: 6,
+              mx: 2,
             }}
           >
             <SearchTextField
