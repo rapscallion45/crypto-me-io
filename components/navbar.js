@@ -23,6 +23,7 @@ import currencyActions from '../redux/actions/actions';
 import numberWithCommas from '../utils/numberWithCommas';
 import getObjMaxProp from '../utils/getObjMaxProp';
 import getObjKeyByValue from '../utils/getObjKeyByValue';
+import SubscribeDialog from './subscribe-dialog';
 
 const SearchTextField = styled(TextField)(({ theme }) => ({
   '& label.Mui-focused': {
@@ -50,6 +51,7 @@ const Navbar = function Navbar() {
   const dispatch = useDispatch();
   const currencyData = useSelector((state) => state.globalCurrencyData);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [subscribeOpen, setSubscribeOpen] = useState(false);
   const open = Boolean(anchorEl);
 
   const handlePopoverOpen = (event) => {
@@ -60,6 +62,14 @@ const Navbar = function Navbar() {
 
   const handlePopoverClose = () => {
     setAnchorEl(null);
+  };
+
+  const openSubscribeDialog = () => {
+    setSubscribeOpen(true);
+  };
+
+  const closeSubscribeDialog = () => {
+    setSubscribeOpen(false);
   };
 
   useEffect(() => {
@@ -258,7 +268,9 @@ const Navbar = function Navbar() {
             <CurrencySwitcher />
           </Box>
           <Box>
-            <Button variant="contained">Subscribe</Button>
+            <Button variant="contained" onClick={openSubscribeDialog}>
+              Subscribe
+            </Button>
           </Box>
         </MHidden>
         <MHidden width="lgUp">
@@ -270,6 +282,7 @@ const Navbar = function Navbar() {
           </IconButton>
         </MHidden>
       </Toolbar>
+      <SubscribeDialog open={subscribeOpen} handleClose={closeSubscribeDialog} />
     </AppBar>
   );
 };

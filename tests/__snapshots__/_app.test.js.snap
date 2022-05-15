@@ -35,8 +35,42 @@ exports[`_app Renders correctly enzyme 1`] = `
       }
     }
   >
-    <Meta />
-    <Layout />
+    <SnackbarProvider
+      TransitionComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "addEndListener": [Function],
+            "appear": [Function],
+            "children": [Function],
+            "container": [Function],
+            "direction": [Function],
+            "easing": [Function],
+            "in": [Function],
+            "onEnter": [Function],
+            "onEntered": [Function],
+            "onEntering": [Function],
+            "onExit": [Function],
+            "onExited": [Function],
+            "onExiting": [Function],
+            "style": [Function],
+            "timeout": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      anchorOrigin={
+        Object {
+          "horizontal": "center",
+          "vertical": "bottom",
+        }
+      }
+      content={[Function]}
+      maxSnack={5}
+    >
+      <Meta />
+      <Layout />
+    </SnackbarProvider>
   </Themeconfig>
 </Provider>
 `;

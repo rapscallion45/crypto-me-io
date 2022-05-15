@@ -79,11 +79,22 @@ function getGlobalCurrencyData() {
   return fetch(`/api/global`, requestOptions).then(handleResponse);
 }
 
+function subscribeMailingList(email) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  };
+
+  return fetch(`/api/subscribe`, requestOptions).then(handleResponse);
+}
+
 const services = {
   getCurrencyTicker,
   getAllCurrencies,
   getCurrencyById,
   getTrendingCurrencies,
   getGlobalCurrencyData,
+  subscribeMailingList,
 };
 export default services;

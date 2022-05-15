@@ -3,11 +3,14 @@ import Particles from 'react-tsparticles';
 import { loadFull } from 'tsparticles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
+import useNotifier from '../../hooks/useNotifier';
 import Footer from '../../components/footer';
 import Navbar from '../../components/navbar';
 import conf from '../../utils/particlesConf';
 
 const Layout = function Layout({ children }) {
+  useNotifier();
+
   const particlesInit = async (main) => {
     await loadFull(main);
   };

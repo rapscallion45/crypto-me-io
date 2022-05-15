@@ -123,6 +123,65 @@ const localCurrencyReducer = (state = { currency: 'usd' }, action) => {
   }
 };
 
+// MAILING LIST REDUCER
+const subscribeMailingListReducer = (state = {}, action) => {
+  switch (action.type) {
+    case types.MAILINGLISTSUBSCRIBE_REQUEST:
+      return {
+        subscribing: true,
+      };
+    case types.MAILINGLISTSUBSCRIBE_SUCCESS:
+      return {
+        subscribed: true,
+      };
+    case types.MAILINGLISTSUBSCRIBE_FAILURE:
+      return {
+        error: action.error,
+        subscribed: false,
+      };
+    default:
+      return state;
+  }
+};
+
+// ALERT REDUCER
+const alertReducer = (state = { notifications: [] }, action) => {
+  switch (action.type) {
+    case types.ENQUEUE_SNACKBAR:
+      return {
+        ...state,
+        notifications: [
+          ...state.notifications,
+          {
+            key: action.key,
+            ...action.notification,
+          },
+        ],
+      };
+
+    case types.CLOSE_SNACKBAR:
+      return {
+        ...state,
+        notifications: state.notifications.map((notification) =>
+          action.dismissAll || notification.key === action.key
+            ? { ...notification, dismissed: true }
+            : { ...notification }
+        ),
+      };
+
+    case types.REMOVE_SNACKBAR:
+      return {
+        ...state,
+        notifications: state.notifications.filter(
+          (notification) => notification.key !== action.key
+        ),
+      };
+
+    default:
+      return state;
+  }
+};
+
 // COMBINED REDUCERS
 const reducers = {
   currencyTicker: currencyTickerReducer,
@@ -131,6 +190,8 @@ const reducers = {
   trendingCurrencies: trendingCurrenciesReducer,
   globalCurrencyData: globalCurrencyDataReducer,
   localCurrency: localCurrencyReducer,
+  subscribeMailingList: subscribeMailingListReducer,
+  alert: alertReducer,
 };
 
 export default combineReducers(reducers);
