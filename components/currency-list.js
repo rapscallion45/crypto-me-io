@@ -17,29 +17,57 @@ const CurrencyList = function CurrencyList({ items }) {
         <Box display="flex" justifyContent="center">
           <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
             {items.length > 0 &&
-              items?.map((item) => (
+              items?.map((currency) => (
                 <>
-                  <ListItem alignItems="middle" justifyContent="center">
+                  <ListItem
+                    component={Link}
+                    href={`/currencies/${currency?.item?.id || currency?.id}`}
+                    alignItems="middle"
+                    justifyContent="center"
+                  >
                     <ListItemAvatar>
-                      <Avatar alt={item.name} src={item.large} />
+                      <Avatar
+                        alt={currency?.item?.name || currency?.name}
+                        src={currency?.item?.large || currency?.large}
+                      />
                     </ListItemAvatar>
                     <ListItemText
-                      primary={item.name}
+                      primary={
+                        <>
+                          <Typography
+                            sx={{ display: 'inline' }}
+                            component="span"
+                            variant="h5"
+                            color="text.primary"
+                          >
+                            {currency?.item?.name || currency?.name}
+                          </Typography>
+                          <br />
+                        </>
+                      }
                       secondary={
                         <Typography
-                          sx={{ display: 'inline' }}
+                          sx={{ display: 'inline', textTransform: 'uppercase' }}
                           component="span"
                           variant="body2"
                           color="text.primary"
                         >
-                          {item.symbol}
+                          {currency?.item?.symbol || currency?.symbol}
                         </Typography>
                       }
                     />
                     <Box mx={2}>
-                      <Chip label={`Rank #${item.market_cap_rank}`} />
+                      <Chip
+                        label={`Rank #${
+                          currency?.item?.market_cap_rank || currency?.market_cap_rank
+                        }`}
+                      />
                     </Box>
-                    <Button component={Link} href={`/currencies/${item.id}`} variant="contained">
+                    <Button
+                      component={Link}
+                      href={`/currencies/${currency?.item?.id || currency?.id}`}
+                      variant="contained"
+                    >
                       View
                     </Button>
                   </ListItem>

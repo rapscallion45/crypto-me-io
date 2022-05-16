@@ -1,11 +1,22 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Page from '../../components/page';
-import CurrencyTable from '../../components/currency-table';
+import CurrencyList from '../../components/currency-list';
+import Loader from '../../components/loader';
 import Layout from '../../layouts/Layout/layout';
+import currencyActions from '../../redux/actions/actions';
 
 const CurrencyDetails = function CurrencyDetails() {
+  const dispatch = useDispatch();
+  const { data, loading, loaded, error } = useSelector((state) => state.trendingCurrencies);
+
+  useEffect(() => {
+    dispatch(currencyActions.getTrendingCurrencies());
+  }, []);
+
   return (
     <Page title="CryptoMe.io | All Currencies">
       <Container disableGutters maxWidth="lg">
@@ -18,7 +29,16 @@ const CurrencyDetails = function CurrencyDetails() {
           </Typography>
         </Box>
         <Box mt={6} mb={12}>
-          <CurrencyTable perPage={50} />
+          <Loader
+            dataLoading={loading}
+            dataLoaded={loaded}
+            dataError={error}
+            loadingText="Loading trending currencies"
+            errorText="Failed to load trending currencies."
+            color="secondary"
+          >
+            <CurrencyList items={data?.coins} />
+          </Loader>
         </Box>
       </Container>
     </Page>

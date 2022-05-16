@@ -61,13 +61,22 @@ function getCurrencyById(id) {
   return fetch(`/api/currency/${id}`, requestOptions).then(handleResponse);
 }
 
-function getTrendingCurrencies(localCurrency) {
+function getTrendingCurrencies() {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch(`/api/trending?vs_currency=${localCurrency}`, requestOptions).then(handleResponse);
+  return fetch(`/api/trending`, requestOptions).then(handleResponse);
+}
+
+function getTopCurrencies(localCurrency) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  return fetch(`/api/top?vs_currency=${localCurrency}`, requestOptions).then(handleResponse);
 }
 
 function getGlobalCurrencyData() {
@@ -103,6 +112,7 @@ const services = {
   getCurrencyTicker,
   getAllCurrencies,
   getCurrencyById,
+  getTopCurrencies,
   getTrendingCurrencies,
   getGlobalCurrencyData,
   search,

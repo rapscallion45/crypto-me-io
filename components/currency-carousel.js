@@ -20,7 +20,7 @@ const CarouselItem = styled(Link)({
 
 const CurrencyCarousel = function CurrencyCarousel() {
   const dispatch = useDispatch();
-  const trendingCurrencies = useSelector((state) => state.trendingCurrencies);
+  const topCurrencies = useSelector((state) => state.topCurrencies);
   const { currency } = useSelector((state) => state.localCurrency);
   const responsive = {
     0: {
@@ -30,7 +30,7 @@ const CurrencyCarousel = function CurrencyCarousel() {
       items: 4,
     },
   };
-  const items = trendingCurrencies.data?.map((coin) => {
+  const items = topCurrencies.data?.map((coin) => {
     const profit = coin.price_change_percentage_24h >= 0;
 
     return (
@@ -53,14 +53,14 @@ const CurrencyCarousel = function CurrencyCarousel() {
   });
 
   useEffect(() => {
-    dispatch(currencyActions.getTrendingCurrencies(currency));
+    dispatch(currencyActions.getTopCurrencies(currency));
   }, [currency]);
 
   return (
     <Loader
-      dataLoading={trendingCurrencies.loading}
-      dataLoaded={trendingCurrencies.loaded}
-      dataError={trendingCurrencies.error}
+      dataLoading={topCurrencies.loading}
+      dataLoaded={topCurrencies.loaded}
+      dataError={topCurrencies.error}
       loadingText="Loading currencies..."
       errorText="Failed to load curreny data."
       color="secondary"

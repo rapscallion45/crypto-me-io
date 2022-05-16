@@ -102,7 +102,7 @@ function getCurrencyById(id) {
 }
 
 /* Get latest trending currency data from endpoint */
-function getTrendingCurrencies(localCurrency) {
+function getTrendingCurrencies() {
   function request() {
     return { type: types.GETTRENDINGCURRENCIES_REQUEST };
   }
@@ -116,7 +116,31 @@ function getTrendingCurrencies(localCurrency) {
   return (dispatch) => {
     dispatch(request());
 
-    services.getTrendingCurrencies(localCurrency).then(
+    services.getTrendingCurrencies().then(
+      (data) => dispatch(success(data)),
+      (error) => {
+        dispatch(failure(error.toString()));
+      }
+    );
+  };
+}
+
+/* Get latest top currency data from endpoint */
+function getTopCurrencies(localCurrency) {
+  function request() {
+    return { type: types.GETTOPCURRENCIES_REQUEST };
+  }
+  function success(topCurrencies) {
+    return { type: types.GETTOPCURRENCIES_SUCCESS, topCurrencies };
+  }
+  function failure(error) {
+    return { type: types.GETTOPCURRENCIES_FAILURE, error };
+  }
+
+  return (dispatch) => {
+    dispatch(request());
+
+    services.getTopCurrencies(localCurrency).then(
       (data) => dispatch(success(data)),
       (error) => {
         dispatch(failure(error.toString()));
@@ -230,6 +254,7 @@ const currencyActions = {
   getCurrencyTicker,
   getAllCurrencies,
   getCurrencyById,
+  getTopCurrencies,
   getTrendingCurrencies,
   getGlobalCurrencyData,
   search,
