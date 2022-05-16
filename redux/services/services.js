@@ -79,6 +79,16 @@ function getGlobalCurrencyData() {
   return fetch(`/api/global`, requestOptions).then(handleResponse);
 }
 
+function search(query) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query }),
+  };
+
+  return fetch(`/api/search`, requestOptions).then(handleResponse);
+}
+
 function subscribeMailingList(email) {
   const requestOptions = {
     method: 'POST',
@@ -95,6 +105,7 @@ const services = {
   getCurrencyById,
   getTrendingCurrencies,
   getGlobalCurrencyData,
+  search,
   subscribeMailingList,
 };
 export default services;

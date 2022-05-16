@@ -182,6 +182,32 @@ const alertReducer = (state = { notifications: [] }, action) => {
   }
 };
 
+// SEARCH REDUCER
+const searchReducer = (state = {}, action) => {
+  switch (action.type) {
+    case types.SEARCH_REQUEST:
+      return {
+        searching: true,
+        term: action.term,
+      };
+
+    case types.SEARCH_SUCCESS:
+      return {
+        complete: true,
+        term: action.term,
+        data: action.searchData,
+      };
+
+    case types.SEARCH_FAILURE:
+      return {
+        error: action.error,
+      };
+
+    default:
+      return state;
+  }
+};
+
 // COMBINED REDUCERS
 const reducers = {
   currencyTicker: currencyTickerReducer,
@@ -192,6 +218,7 @@ const reducers = {
   localCurrency: localCurrencyReducer,
   subscribeMailingList: subscribeMailingListReducer,
   alert: alertReducer,
+  search: searchReducer,
 };
 
 export default combineReducers(reducers);

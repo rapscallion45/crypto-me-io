@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -9,6 +11,7 @@ import Button from '@mui/material/Button';
 import Page from '../../components/page';
 import CurrencyTable from '../../components/currency-table';
 import Layout from '../../layouts/Layout/layout';
+import currencyActions from '../../redux/actions/actions';
 
 const SearchTextField = styled(TextField)(({ theme }) => ({
   '& label.Mui-focused': {
@@ -33,6 +36,19 @@ const SearchTextField = styled(TextField)(({ theme }) => ({
 }));
 
 const AllCurrencies = function AllCurrencies() {
+  const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+
+    if (searchTerm !== '') dispatch(currencyActions.search(searchTerm));
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <Page title="CryptoMe.io | All Currencies">
       <Container disableGutters maxWidth="lg">
@@ -56,21 +72,24 @@ const AllCurrencies = function AllCurrencies() {
               mx: 2,
             }}
           >
-            <SearchTextField
-              fullWidth
-              label="Search cryptos..."
-              id="fullWidth"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Button variant="text" sx={{ border: 'none' }}>
-                      <SearchIcon color="secondary" />
-                    </Button>
-                  </InputAdornment>
-                ),
-              }}
-              sx={{ maxWidth: 600 }}
-            />
+            <form onSubmit={handleSearch} style={{ width: '100%', maxWidth: 600 }}>
+              <SearchTextField
+                fullWidth
+                label="Search cryptos..."
+                id="fullWidth"
+                onChange={handleSearchChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Button variant="text" sx={{ border: 'none' }} onClick={handleSearch}>
+                        <SearchIcon color="secondary" />
+                      </Button>
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{ maxWidth: 600 }}
+              />
+            </form>
           </Box>
           <CurrencyTable perPage={50} />
         </Box>

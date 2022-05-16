@@ -52,6 +52,7 @@ const Navbar = function Navbar() {
   const currencyData = useSelector((state) => state.globalCurrencyData);
   const [anchorEl, setAnchorEl] = useState(null);
   const [subscribeOpen, setSubscribeOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const open = Boolean(anchorEl);
 
   const handlePopoverOpen = (event) => {
@@ -81,6 +82,16 @@ const Navbar = function Navbar() {
     const max = getObjMaxProp(currencies);
     const name = getObjKeyByValue(currencies, max);
     return `${name.toUpperCase()} ${max.toFixed(1)}%`;
+  };
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+
+    if (searchTerm !== '') dispatch(currencyActions.search(searchTerm));
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
   return (
@@ -247,22 +258,25 @@ const Navbar = function Navbar() {
             </Menu>
           </nav>
           <Box sx={{ flexGrow: 4 }}>
-            <SearchTextField
-              fullWidth
-              label="Search cryptos..."
-              id="fullWidth"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Button variant="text" sx={{ border: 'none' }}>
-                      <SearchIcon color="primary" />
-                    </Button>
-                  </InputAdornment>
-                ),
-              }}
-              size="small"
-              sx={{ maxWidth: 300 }}
-            />
+            <form onSubmit={handleSearch}>
+              <SearchTextField
+                fullWidth
+                label="Search cryptos..."
+                id="fullWidth"
+                onChange={handleSearchChange}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Button variant="text" sx={{ border: 'none' }} onClick={handleSearch}>
+                        <SearchIcon color="primary" />
+                      </Button>
+                    </InputAdornment>
+                  ),
+                }}
+                size="small"
+                sx={{ maxWidth: 300 }}
+              />
+            </form>
           </Box>
           <Box>
             <CurrencySwitcher />

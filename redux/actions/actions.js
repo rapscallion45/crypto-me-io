@@ -1,3 +1,4 @@
+import router from 'next/router';
 import * as types from '../types/types';
 import services from '../services/services';
 
@@ -76,7 +77,7 @@ function getAllCurrencies(page, localCurrency) {
   };
 }
 
-/* Get all currency data from endpoint */
+/* Get currency data by ID from endpoint */
 function getCurrencyById(id) {
   function request() {
     return { type: types.GETCURRENCYDATABYID_REQUEST };
@@ -124,7 +125,7 @@ function getTrendingCurrencies(localCurrency) {
   };
 }
 
-/* Get latest trending currency data from endpoint */
+/* Get latest global currency data from endpoint */
 function getGlobalCurrencyData() {
   function request() {
     return { type: types.GLOBALCURRENCYDATA_REQUEST };
@@ -148,12 +149,37 @@ function getGlobalCurrencyData() {
   };
 }
 
-/* Get latest trending currency data from endpoint */
+/* Search for currency data from endpoint */
+function search(query) {
+  function request(term) {
+    router.push('/search');
+    return { type: types.SEARCH_REQUEST, term };
+  }
+  function success(searchData, term) {
+    return { type: types.SEARCH_SUCCESS, searchData, term };
+  }
+  function failure(error) {
+    return { type: types.SEARCH_FAILURE, error };
+  }
+
+  return (dispatch) => {
+    dispatch(request(query));
+
+    services.search(query).then(
+      (data) => dispatch(success(data, query)),
+      (error) => {
+        dispatch(failure(error.toString()));
+      }
+    );
+  };
+}
+
+/* Update the local currency setting for app */
 function updateLocalCurrency(currency) {
   return { type: types.UPDATELOCALCURRENCY, currency };
 }
 
-/* Get currency ticker data from endpoint */
+/* Mailing list subscribe */
 function subscribeMailingList(email) {
   function request() {
     return { type: types.MAILINGLISTSUBSCRIBE_REQUEST };
@@ -185,7 +211,7 @@ function subscribeMailingList(email) {
         dispatch(failure(error.toString()));
         dispatch(
           enqueueSnackbar({
-            message: 'Ooops, we could not add your email. Please try again later.',
+            message: error,
             options: {
               key: new Date().getTime() + Math.random(),
               variant: 'error',
@@ -198,15 +224,16 @@ function subscribeMailingList(email) {
 }
 
 const currencyActions = {
+  enqueueSnackbar,
+  closeSnackbar,
+  removeSnackbar,
   getCurrencyTicker,
   getAllCurrencies,
   getCurrencyById,
   getTrendingCurrencies,
   getGlobalCurrencyData,
+  search,
   updateLocalCurrency,
   subscribeMailingList,
-  enqueueSnackbar,
-  closeSnackbar,
-  removeSnackbar,
 };
 export default currencyActions;
