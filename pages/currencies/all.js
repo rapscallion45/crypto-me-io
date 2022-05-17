@@ -81,7 +81,12 @@ const AllCurrencies = function AllCurrencies() {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
-                      <Button variant="text" sx={{ border: 'none' }} onClick={handleSearch}>
+                      <Button
+                        variant="text"
+                        sx={{ border: 'none' }}
+                        onClick={handleSearch}
+                        disabled={searchTerm === ''}
+                      >
                         <SearchIcon color="secondary" />
                       </Button>
                     </InputAdornment>

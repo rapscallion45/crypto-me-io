@@ -18,12 +18,15 @@ import Logo from './logo';
 import Link from './link';
 import Loader from './loader';
 import MHidden from './m-hidden';
+import MobileNav from './mobile-nav';
+import SearchDialog from './search-dialog';
 import CurrencySwitcher from './currency-switcher';
 import currencyActions from '../redux/actions/actions';
 import numberWithCommas from '../utils/numberWithCommas';
 import getObjMaxProp from '../utils/getObjMaxProp';
 import getObjKeyByValue from '../utils/getObjKeyByValue';
 import SubscribeDialog from './subscribe-dialog';
+import navMenuItems from '../utils/navMenuItems';
 
 const SearchTextField = styled(TextField)(({ theme }) => ({
   '& label.Mui-focused': {
@@ -54,6 +57,24 @@ const Navbar = function Navbar() {
   const [subscribeOpen, setSubscribeOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const open = Boolean(anchorEl);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const toggleMobileNav = (toggle) => (event) => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setMobileOpen(toggle);
+  };
+
+  const toggleSearch = (toggle) => (event) => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setSearchOpen(toggle);
+  };
 
   const handlePopoverOpen = (event) => {
     if (anchorEl !== event.currentTarget) {
@@ -223,38 +244,29 @@ const Navbar = function Navbar() {
                 horizontal: 'left',
               }}
             >
-              <MenuItem component={Link} href="/currencies/all" onClick={handlePopoverClose}>
-                All Cryptos
-              </MenuItem>
+              {navMenuItems
+                .filter((item) => item.section === 1)
+                .map((item) => (
+                  <MenuItem component={Link} href={item.href} onClick={handlePopoverClose}>
+                    {item.label}
+                  </MenuItem>
+                ))}
               <Divider />
-              <MenuItem component={Link} href="/currencies/discover" onClick={handlePopoverClose}>
-                Discover
-              </MenuItem>
-              <MenuItem
-                component={Link}
-                href="/currencies/gainers-losers"
-                onClick={handlePopoverClose}
-              >
-                Gainers & Losers
-              </MenuItem>
-              <MenuItem
-                component={Link}
-                href="/currencies/high-volume"
-                onClick={handlePopoverClose}
-              >
-                High Volume
-              </MenuItem>
+              {navMenuItems
+                .filter((item) => item.section === 2)
+                .map((item) => (
+                  <MenuItem component={Link} href={item.href} onClick={handlePopoverClose}>
+                    {item.label}
+                  </MenuItem>
+                ))}
               <Divider />
-              <MenuItem component={Link} href="/currencies/trending" onClick={handlePopoverClose}>
-                Trending
-              </MenuItem>
-              <MenuItem
-                component={Link}
-                href="/currencies/global-charts"
-                onClick={handlePopoverClose}
-              >
-                Global
-              </MenuItem>
+              {navMenuItems
+                .filter((item) => item.section === 3)
+                .map((item) => (
+                  <MenuItem component={Link} href={item.href} onClick={handlePopoverClose}>
+                    {item.label}
+                  </MenuItem>
+                ))}
             </Menu>
           </nav>
           <Box sx={{ flexGrow: 4 }}>
@@ -264,10 +276,16 @@ const Navbar = function Navbar() {
                 label="Search cryptos..."
                 id="fullWidth"
                 onChange={handleSearchChange}
+                value={searchTerm}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
-                      <Button variant="text" sx={{ border: 'none' }} onClick={handleSearch}>
+                      <Button
+                        variant="text"
+                        sx={{ border: 'none' }}
+                        onClick={handleSearch}
+                        disabled={searchTerm === ''}
+                      >
                         <SearchIcon color="primary" />
                       </Button>
                     </InputAdornment>
@@ -291,9 +309,37 @@ const Navbar = function Navbar() {
           <Box sx={{ flexGrow: 1 }}>
             <CurrencySwitcher />
           </Box>
-          <IconButton aria-label="open-menu">
-            <MenuIcon color="primary" sx={{ fontSize: 30, flexGrow: 1 }} />
+          <IconButton aria-label="search">
+            <SearchIcon
+              color="primary"
+              sx={{ fontSize: 30, flexGrow: 1 }}
+              onClick={toggleSearch(true)}
+              fontSize="small"
+            />
           </IconButton>
+          <IconButton aria-label="open-menu">
+            <MenuIcon
+              color="primary"
+              sx={{ fontSize: 30, flexGrow: 1 }}
+              onClick={toggleMobileNav(true)}
+              fontSize="small"
+            />
+          </IconButton>
+          <MobileNav
+            open={mobileOpen}
+            handleToggle={toggleMobileNav}
+            searchTerm={searchTerm}
+            openSubscribeDialog={openSubscribeDialog}
+            handleSearch={handleSearch}
+            handleSearchChange={handleSearchChange}
+          />
+          <SearchDialog
+            open={searchOpen}
+            handleToggle={toggleSearch}
+            searchTerm={searchTerm}
+            handleSearch={handleSearch}
+            handleSearchChange={handleSearchChange}
+          />
         </MHidden>
       </Toolbar>
       <SubscribeDialog open={subscribeOpen} handleClose={closeSubscribeDialog} />
