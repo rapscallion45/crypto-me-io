@@ -123,7 +123,6 @@ const CurrencyDetails = function CurrencyDetails() {
                   display="flex"
                   justifyContent="center"
                   flexDirection="column"
-                  ml={3}
                   sx={{ width: '100%' }}
                 >
                   <Box display="flex" justifyContent="left" alignContent="middle">
