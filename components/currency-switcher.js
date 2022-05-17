@@ -15,7 +15,7 @@ const CurrencySwitcher = function CurrencySwitcher() {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
+    <FormControl sx={{ m: 1, minWidth: 95 }} size="small">
       <Select
         value={currency}
         onChange={handleCurrencyChange}
