@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { styled } from '@mui/material/styles';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
@@ -248,7 +250,10 @@ const Navbar = function Navbar() {
                 .filter((item) => item.section === 1)
                 .map((item) => (
                   <MenuItem component={Link} href={item.href} onClick={handlePopoverClose}>
-                    {item.label}
+                    <ListItemIcon>
+                      <item.icon />
+                    </ListItemIcon>
+                    <ListItemText>{item.label}</ListItemText>
                   </MenuItem>
                 ))}
               <Divider />
@@ -256,6 +261,9 @@ const Navbar = function Navbar() {
                 .filter((item) => item.section === 2)
                 .map((item) => (
                   <MenuItem component={Link} href={item.href} onClick={handlePopoverClose}>
+                    <ListItemIcon>
+                      <item.icon />
+                    </ListItemIcon>
                     {item.label}
                   </MenuItem>
                 ))}
@@ -264,6 +272,9 @@ const Navbar = function Navbar() {
                 .filter((item) => item.section === 3)
                 .map((item) => (
                   <MenuItem component={Link} href={item.href} onClick={handlePopoverClose}>
+                    <ListItemIcon>
+                      <item.icon />
+                    </ListItemIcon>
                     {item.label}
                   </MenuItem>
                 ))}
