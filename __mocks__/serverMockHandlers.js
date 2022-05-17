@@ -7,6 +7,7 @@ import globalCurrencyDataMock from './globalCurrencyDataMock';
 import trendingCurrenciesDataMock from './trendingCurrenciesDataMock';
 import currencyDataMock from './currencyDataMock';
 import allCurrenciesDataMock from './allCurrenciesDataMock';
+import searchDataMock from './searchDataMock';
 
 const { API_URL, CG_API_URL } = process.env;
 
@@ -52,6 +53,10 @@ const serverMockHandlers = [
   rest.get(`${CG_API_URL}/coins/:id`, async (req, res, ctx) =>
     res(ctx.status(200), ctx.json(currencyDataMock))
   ),
+  /* Test/mock get search query */
+  rest.get(`${CG_API_URL}/search`, async (req, res, ctx) =>
+    res(ctx.status(200), ctx.json(searchDataMock))
+  ),
   /* Test/mock get trending currency data */
   rest.get(`${CG_API_URL}/search/trending`, async (req, res, ctx) =>
     res(ctx.status(200), ctx.json(trendingCurrenciesDataMock))
@@ -59,6 +64,10 @@ const serverMockHandlers = [
   /* Test/mock get global currency data */
   rest.get(`${CG_API_URL}/global`, async (req, res, ctx) =>
     res(ctx.status(200), ctx.json(globalCurrencyDataMock))
+  ),
+  /* Test/mock subscribe to mailing list */
+  rest.post(`https://reqres.in/api/users`, async (req, res, ctx) =>
+    res(ctx.status(201), ctx.json({ message: 'ok' }))
   ),
 ];
 
