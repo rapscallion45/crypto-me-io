@@ -14,7 +14,7 @@ const HighVolume = function HighVolume() {
             Highest Trading Volume Currencies
           </Typography>
           <Typography variant="h5" align="center" color="secondary.main" paragraph>
-            Top 100 currencies by trading volume over the last 24 hours
+            Top currencies by trading volume over the last 24 hours
           </Typography>
         </Box>
         <Box mt={6} mb={12}>
