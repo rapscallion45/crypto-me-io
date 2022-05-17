@@ -26,7 +26,7 @@ import { visuallyHidden } from '@mui/utils';
 import Loader from './loader';
 import Link from './link';
 import currencyActions from '../redux/actions/actions';
-import numberwithcommas from '../utils/numberWithCommas';
+import numberWithCommas from '../utils/numberWithCommas';
 
 const CurrencyTableSortLabel = styled(TableSortLabel)(() => ({
   '& .MuiTableSortLabel-iconDirectionDesc': {
@@ -362,7 +362,7 @@ const CurrencyTable = function CurrencyTable({ orderDataBy = 'market_cap_desc', 
                         </TableCell>
                         <TableCell align="right">
                           {getSymbolFromCurrency(currency)}
-                          {numberwithcommas(row.current_price?.toFixed(2))}
+                          {numberWithCommas(row.current_price?.toFixed(2))}
                         </TableCell>
                         <TableCell align="right">
                           <Typography
@@ -415,19 +415,19 @@ const CurrencyTable = function CurrencyTable({ orderDataBy = 'market_cap_desc', 
                           </Typography>
                         </TableCell>
                         <TableCell align="right">
-                          {numberwithcommas(row.circulating_supply?.toFixed(0))}
+                          {numberWithCommas(row.circulating_supply?.toFixed(0))}
                         </TableCell>
                         <TableCell align="right">
-                          {row.total_supply ? numberwithcommas(row.total_supply.toFixed(0)) : '∞'}
+                          {row.total_supply ? numberWithCommas(row.total_supply.toFixed(0)) : '∞'}
                         </TableCell>
                         <TableCell align="right">
                           {getSymbolFromCurrency(currency)}
-                          {row.total_volume ? numberwithcommas(row.total_volume.toFixed(0)) : '∞'}
+                          {row.total_volume ? numberWithCommas(row.total_volume.toFixed(0)) : '∞'}
                         </TableCell>
                         <TableCell align="right" sx={{ px: 2 }}>
                           <Box position="relative">
                             {getSymbolFromCurrency(currency)}
-                            {numberwithcommas(row.market_cap?.toFixed(0))}
+                            {numberWithCommas(row.market_cap?.toFixed(0))}
                             <Box position="absolute" sx={{ top: -15, right: -5 }}>
                               <Typography
                                 variant="body4"
