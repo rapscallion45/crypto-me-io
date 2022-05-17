@@ -15,7 +15,7 @@ const CurrencyList = function CurrencyList({ items }) {
     <>
       {items.length > 0 && (
         <Box display="flex" justifyContent="center">
-          <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper' }}>
+          <List sx={{ width: '100%', maxWidth: 500, bgcolor: 'background.paper', borderRadius: 1 }}>
             {items.length > 0 &&
               items?.map((currency) => (
                 <>

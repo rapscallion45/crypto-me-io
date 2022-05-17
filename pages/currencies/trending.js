@@ -9,7 +9,7 @@ import Loader from '../../components/loader';
 import Layout from '../../layouts/Layout/layout';
 import currencyActions from '../../redux/actions/actions';
 
-const CurrencyDetails = function CurrencyDetails() {
+const Trending = function Trending() {
   const dispatch = useDispatch();
   const { data, loading, loaded, error } = useSelector((state) => state.trendingCurrencies);
 
@@ -45,6 +45,6 @@ const CurrencyDetails = function CurrencyDetails() {
   );
 };
 
-CurrencyDetails.Layout = Layout;
+Trending.Layout = Layout;
 
-export default CurrencyDetails;
+export default Trending;

@@ -96,7 +96,7 @@ const AllCurrencies = function AllCurrencies() {
               />
             </form>
           </Box>
-          <CurrencyTable perPage={50} />
+          <CurrencyTable orderDataBy="market_cap_desc" perPage={50} />
         </Box>
       </Container>
     </Page>

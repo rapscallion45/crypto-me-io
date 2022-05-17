@@ -5,7 +5,7 @@ import Page from '../../components/page';
 import CurrencyTable from '../../components/currency-table';
 import Layout from '../../layouts/Layout/layout';
 
-const CurrencyDetails = function CurrencyDetails() {
+const HighVolume = function HighVolume() {
   return (
     <Page title="CryptoMe.io | All Currencies">
       <Container disableGutters maxWidth="lg">
@@ -18,13 +18,13 @@ const CurrencyDetails = function CurrencyDetails() {
           </Typography>
         </Box>
         <Box mt={6} mb={12}>
-          <CurrencyTable perPage={50} />
+          <CurrencyTable orderDataBy="volume_desc" perPage={50} />
         </Box>
       </Container>
     </Page>
   );
 };
 
-CurrencyDetails.Layout = Layout;
+HighVolume.Layout = Layout;
 
-export default CurrencyDetails;
+export default HighVolume;

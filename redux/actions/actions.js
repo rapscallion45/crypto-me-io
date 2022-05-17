@@ -54,7 +54,7 @@ function getCurrencyTicker(query) {
 }
 
 /* Get all currency data from endpoint */
-function getAllCurrencies(page, localCurrency) {
+function getAllCurrencies(page, perPage, localCurrency, order) {
   function request() {
     return { type: types.GETALLCURRENCIES_REQUEST };
   }
@@ -68,7 +68,7 @@ function getAllCurrencies(page, localCurrency) {
   return (dispatch) => {
     dispatch(request());
 
-    services.getAllCurrencies(page, localCurrency).then(
+    services.getAllCurrencies(page, perPage, localCurrency, order).then(
       (data) => dispatch(success(data)),
       (error) => {
         dispatch(failure(error.toString()));

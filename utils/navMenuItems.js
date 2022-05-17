@@ -2,7 +2,7 @@ import ListIcon from '@mui/icons-material/List';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import SsidChartIcon from '@mui/icons-material/SsidChart';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import StarsIcon from '@mui/icons-material/Stars';
 import PublicIcon from '@mui/icons-material/Public';
 
 const navMenuItems = [
@@ -13,9 +13,9 @@ const navMenuItems = [
     section: 1,
   },
   {
-    label: 'Discover',
-    icon: ManageSearchIcon,
-    href: '/currencies/discover',
+    label: 'Top Currencies',
+    icon: StarsIcon,
+    href: '/currencies/top-currencies',
     section: 2,
   },
   {

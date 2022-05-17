@@ -117,6 +117,12 @@ const headCells = [
     label: 'Total Supply',
   },
   {
+    id: 'total_volume',
+    numeric: true,
+    disablePadding: true,
+    label: '24h Volume',
+  },
+  {
     id: 'market_cap',
     numeric: true,
     disablePadding: true,
@@ -147,7 +153,7 @@ const CurrencyTableHead = function CurrencyTableHead(props) {
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              <Typography variant="h6" color="secondary.main">
+              <Typography variant="body" color="secondary.main">
                 {headCell.label}
               </Typography>
               {orderBy === headCell.id ? (
@@ -247,18 +253,18 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-const CurrencyTable = function CurrencyTable({ perPage = 10 }) {
+const CurrencyTable = function CurrencyTable({ orderDataBy = 'market_cap_desc', perPage = 10 }) {
   const dispatch = useDispatch();
   const { loading, error, loaded, data } = useSelector((state) => state.allCurrencies);
   const { currency } = useSelector((state) => state.localCurrency);
   const [order, setOrder] = useState('desc');
-  const [orderBy, setOrderBy] = useState('market_cap');
+  const [orderBy, setOrderBy] = useState(orderDataBy);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(perPage);
 
   useEffect(() => {
-    dispatch(currencyActions.getAllCurrencies(page, currency));
-  }, [currency]);
+    dispatch(currencyActions.getAllCurrencies(page, rowsPerPage, currency, orderDataBy));
+  }, [currency, rowsPerPage]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -414,6 +420,10 @@ const CurrencyTable = function CurrencyTable({ perPage = 10 }) {
                         <TableCell align="right">
                           {row.total_supply ? numberwithcommas(row.total_supply.toFixed(0)) : '∞'}
                         </TableCell>
+                        <TableCell align="right">
+                          {getSymbolFromCurrency(currency)}
+                          {row.total_volume ? numberwithcommas(row.total_volume.toFixed(0)) : '∞'}
+                        </TableCell>
                         <TableCell align="right" sx={{ px: 2 }}>
                           <Box position="relative">
                             {getSymbolFromCurrency(currency)}
@@ -466,7 +476,8 @@ const CurrencyTable = function CurrencyTable({ perPage = 10 }) {
 };
 
 CurrencyTable.propTypes = {
-  perPage: PropTypes.number,
+  orderDataBy: PropTypes.number.isRequired,
+  perPage: PropTypes.number.isRequired,
 };
 
 export default CurrencyTable;

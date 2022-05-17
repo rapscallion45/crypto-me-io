@@ -18,7 +18,7 @@ const GainersLosers = function GainersLosers() {
           </Typography>
         </Box>
         <Box mt={6} mb={12}>
-          <CurrencyTable perPage={50} />
+          <CurrencyTable orderDataBy="market_cap_desc" perPage={50} />
         </Box>
       </Container>
     </Page>

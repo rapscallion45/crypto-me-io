@@ -40,14 +40,16 @@ function getCurrencyTicker(query) {
   ).then(handleResponse);
 }
 
-function getAllCurrencies(page, localCurrency) {
+function getAllCurrencies(page, perPage, localCurrency, order) {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
 
   return fetch(
-    `/api/all-currencies?vs_currency=${localCurrency}&page=${page || 1}`,
+    `/api/all-currencies?vs_currency=${localCurrency || 'usd'}&page=${page || 1}&perPage=${
+      perPage || 50
+    }&order=${order || 'market_cap_desc'}`,
     requestOptions
   ).then(handleResponse);
 }
