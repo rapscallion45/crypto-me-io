@@ -79,12 +79,16 @@ const SearchDialog = function SearchDialog({
         </Box>
       </DialogContent>
       <DialogActions>
-        <Button fullWidth onClick={handleToggle(false)}>
-          Cancel
-        </Button>
-        <Button fullWidth onClick={handleToggle(false)} autoFocus>
-          Search
-        </Button>
+        <Box sx={{ flexGrow: 1 }}>
+          <Button fullWidth onClick={handleToggle(false)}>
+            Cancel
+          </Button>
+        </Box>
+        <Box role="button" onClick={handleToggle(false)} sx={{ flexGrow: 4 }}>
+          <Button fullWidth variant="contained" onClick={handleSearch} autoFocus>
+            Search
+          </Button>
+        </Box>
       </DialogActions>
     </Dialog>
   );
