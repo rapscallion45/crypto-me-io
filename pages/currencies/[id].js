@@ -418,7 +418,9 @@ const CurrencyDetails = function CurrencyDetails() {
                           paragraph
                           sx={{ maxWidth: 200 }}
                         >
-                          {`${numberWithCommas(data?.market_data?.total_supply.toFixed(0))}`}
+                          {`${
+                            numberWithCommas(data?.market_data?.total_supply?.toFixed(0)) || 'N/A'
+                          }`}
                         </Typography>
                       </Box>
                     </Box>
