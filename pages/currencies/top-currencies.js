@@ -14,7 +14,7 @@ const TopCurrencies = function TopCurrencies() {
             CryptoMe Top Currencies
           </Typography>
           <Typography variant="h5" align="center" color="secondary.main" paragraph>
-            Explore the highest ranked trading crypto currencies currently
+            Explore the highest currently ranked trading cryptocurrencies
           </Typography>
         </Box>
         <Box mt={6} mb={12}>
