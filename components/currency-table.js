@@ -25,6 +25,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import Loader from './loader';
 import Link from './link';
+import ScrollBar from './scrollbar';
 import currencyActions from '../redux/actions/actions';
 import numberWithCommas from '../utils/numberWithCommas';
 
@@ -304,146 +305,160 @@ const CurrencyTable = function CurrencyTable({ orderDataBy = 'market_cap_desc', 
         >
           <CurrencyTableToolbar />
           <TableContainer>
-            <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
-              <CurrencyTableHead
-                order={order}
-                orderBy={orderBy}
-                onRequestSort={handleRequestSort}
-              />
-              <TableBody>
-                {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
-                {stableSort(data || [], getComparator(order, orderBy)).map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`;
+            <ScrollBar
+              sx={{
+                height: '100%',
+                overflowY: 'auto',
+                overflowX: 'auto',
+                '& .simplebar-content': {
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                },
+              }}
+            >
+              <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle" size="medium">
+                <CurrencyTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                />
 
-                  return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        padding="none"
-                        sx={{ width: '250px' }}
-                      >
-                        <Box
-                          component={Link}
-                          href={`/currencies/${row.id}`}
-                          display="flex"
-                          sx={{ width: '180px', px: 1 }}
-                          underline="none"
+                <TableBody>
+                  {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+                 rows.slice().sort(getComparator(order, orderBy)) */}
+                  {stableSort(data || [], getComparator(order, orderBy)).map((row, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
+                        <TableCell
+                          component="th"
+                          id={labelId}
+                          scope="row"
+                          padding="none"
+                          sx={{ width: '250px' }}
                         >
-                          <img
-                            loading="lazy"
-                            alt={row.name}
-                            src={row.image}
-                            height={50}
-                            width={50}
-                            style={{ marginRight: 10 }}
-                          />
-                          <Box display="flex" flexDirection="column">
-                            <Typography noWrap variant="h6" sx={{ width: '170px' }} color="black">
-                              {row.name}
-                            </Typography>
-                            <Typography
-                              noWrap
-                              variant="body"
-                              color="black"
-                              sx={{ textTransform: 'uppercase' }}
-                            >
-                              {row.symbol}
-                            </Typography>
+                          <Box
+                            component={Link}
+                            href={`/currencies/${row.id}`}
+                            display="flex"
+                            sx={{ width: '180px', px: 1 }}
+                            underline="none"
+                          >
+                            <img
+                              loading="lazy"
+                              alt={row.name}
+                              src={row.image}
+                              height={50}
+                              width={50}
+                              style={{ marginRight: 10 }}
+                            />
+                            <Box display="flex" flexDirection="column">
+                              <Typography noWrap variant="h6" sx={{ width: '170px' }} color="black">
+                                {row.name}
+                              </Typography>
+                              <Typography
+                                noWrap
+                                variant="body"
+                                color="black"
+                                sx={{ textTransform: 'uppercase' }}
+                              >
+                                {row.symbol}
+                              </Typography>
+                            </Box>
                           </Box>
-                        </Box>
-                      </TableCell>
-                      <TableCell align="right">
-                        {getSymbolFromCurrency(currency)}
-                        {numberWithCommas(row.current_price?.toFixed(2))}
-                      </TableCell>
-                      <TableCell align="right">
-                        <Typography
-                          noWrap
-                          color={
-                            row.price_change_percentage_1h_in_currency >= 0
-                              ? 'success.main'
-                              : 'error.main'
-                          }
-                        >
-                          {row.price_change_percentage_1h_in_currency >= 0 && '+'}
-                          {row.price_change_percentage_1h_in_currency?.toFixed(1)}%
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="right">
-                        <Typography
-                          noWrap
-                          color={
-                            row.price_change_percentage_24h >= 0 ? 'success.main' : 'error.main'
-                          }
-                        >
-                          {row.price_change_percentage_24h >= 0 && '+'}
-                          {row.price_change_percentage_24h?.toFixed(1)}%
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="right">
-                        <Typography
-                          noWrap
-                          color={
-                            row.price_change_percentage_7d_in_currency >= 0
-                              ? 'success.main'
-                              : 'error.main'
-                          }
-                        >
-                          {row.price_change_percentage_7d_in_currency >= 0 && '+'}
-                          {row.price_change_percentage_7d_in_currency?.toFixed(1)}%
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="right">
-                        <Typography
-                          noWrap
-                          color={
-                            row.price_change_percentage_30d_in_currency >= 0
-                              ? 'success.main'
-                              : 'error.main'
-                          }
-                        >
-                          {row.price_change_percentage_30d_in_currency >= 0 && '+'}
-                          {row.price_change_percentage_30d_in_currency?.toFixed(1)}%
-                        </Typography>
-                      </TableCell>
-                      <TableCell align="right">
-                        {numberWithCommas(row.circulating_supply?.toFixed(0))}
-                      </TableCell>
-                      <TableCell align="right">
-                        {row.total_supply ? numberWithCommas(row.total_supply.toFixed(0)) : '∞'}
-                      </TableCell>
-                      <TableCell align="right">
-                        {getSymbolFromCurrency(currency)}
-                        {row.total_volume ? numberWithCommas(row.total_volume.toFixed(0)) : '∞'}
-                      </TableCell>
-                      <TableCell align="right" sx={{ px: 2 }}>
-                        <Box position="relative">
+                        </TableCell>
+                        <TableCell align="right">
                           {getSymbolFromCurrency(currency)}
-                          {numberWithCommas(row.market_cap?.toFixed(0))}
-                          <Box position="absolute" sx={{ top: -15, right: -5 }}>
-                            <Typography
-                              variant="body4"
-                              noWrap
-                              color={
-                                row.market_cap_change_percentage_24h >= 0
-                                  ? 'success.main'
-                                  : 'error.main'
-                              }
-                            >
-                              {row.market_cap_change_percentage_24h >= 0 && '+'}
-                              {row.market_cap_change_percentage_24h?.toFixed(1)}%
-                            </Typography>
+                          {numberWithCommas(row.current_price?.toFixed(2))}
+                        </TableCell>
+                        <TableCell align="right">
+                          <Typography
+                            noWrap
+                            color={
+                              row.price_change_percentage_1h_in_currency >= 0
+                                ? 'success.main'
+                                : 'error.main'
+                            }
+                          >
+                            {row.price_change_percentage_1h_in_currency >= 0 && '+'}
+                            {row.price_change_percentage_1h_in_currency?.toFixed(1)}%
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Typography
+                            noWrap
+                            color={
+                              row.price_change_percentage_24h >= 0 ? 'success.main' : 'error.main'
+                            }
+                          >
+                            {row.price_change_percentage_24h >= 0 && '+'}
+                            {row.price_change_percentage_24h?.toFixed(1)}%
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Typography
+                            noWrap
+                            color={
+                              row.price_change_percentage_7d_in_currency >= 0
+                                ? 'success.main'
+                                : 'error.main'
+                            }
+                          >
+                            {row.price_change_percentage_7d_in_currency >= 0 && '+'}
+                            {row.price_change_percentage_7d_in_currency?.toFixed(1)}%
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Typography
+                            noWrap
+                            color={
+                              row.price_change_percentage_30d_in_currency >= 0
+                                ? 'success.main'
+                                : 'error.main'
+                            }
+                          >
+                            {row.price_change_percentage_30d_in_currency >= 0 && '+'}
+                            {row.price_change_percentage_30d_in_currency?.toFixed(1)}%
+                          </Typography>
+                        </TableCell>
+                        <TableCell align="right">
+                          {numberWithCommas(row.circulating_supply?.toFixed(0))}
+                        </TableCell>
+                        <TableCell align="right">
+                          {row.total_supply ? numberWithCommas(row.total_supply.toFixed(0)) : '∞'}
+                        </TableCell>
+                        <TableCell align="right">
+                          {getSymbolFromCurrency(currency)}
+                          {row.total_volume ? numberWithCommas(row.total_volume.toFixed(0)) : '∞'}
+                        </TableCell>
+                        <TableCell align="right" sx={{ px: 2 }}>
+                          <Box position="relative">
+                            {getSymbolFromCurrency(currency)}
+                            {numberWithCommas(row.market_cap?.toFixed(0))}
+                            <Box position="absolute" sx={{ top: -15, right: -5 }}>
+                              <Typography
+                                variant="body4"
+                                noWrap
+                                color={
+                                  row.market_cap_change_percentage_24h >= 0
+                                    ? 'success.main'
+                                    : 'error.main'
+                                }
+                              >
+                                {row.market_cap_change_percentage_24h >= 0 && '+'}
+                                {row.market_cap_change_percentage_24h?.toFixed(1)}%
+                              </Typography>
+                            </Box>
                           </Box>
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
-              </TableBody>
-            </Table>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </ScrollBar>
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[5, 10, 25, 50]}
