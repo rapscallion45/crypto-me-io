@@ -23,6 +23,7 @@ const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false })
 const getInterval = (rangeVal) => {
   switch (rangeVal) {
     case '1':
+      return 'minutely';
     case '4':
     case '7':
       return 'hourly';
