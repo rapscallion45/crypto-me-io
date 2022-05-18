@@ -27,7 +27,7 @@ const conf = {
       value: 'rgb(0,212,255)',
     },
     opacity: {
-      value: 0.15,
+      value: 0.125,
     },
     number: {
       value: 300,
