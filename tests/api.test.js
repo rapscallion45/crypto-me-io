@@ -5,6 +5,7 @@ import getTrendingCurrencies from '../pages/api/trending';
 import getTopCurrencies from '../pages/api/top';
 import getCurrencyById from '../pages/api/currency/[id]';
 import getAllCurrenciesData from '../pages/api/all-currencies';
+import getMarketChartData from '../pages/api/market-chart';
 import search from '../pages/api/search';
 import subscribe from '../pages/api/subscribe';
 import currencyTickerDataMock from '../__mocks__/currencyTickerDataMock';
@@ -13,6 +14,7 @@ import trendingCurrenciesDataMock from '../__mocks__/trendingCurrenciesDataMock'
 import currencyDataMock from '../__mocks__/currencyDataMock';
 import allCurrenciesDataMock from '../__mocks__/allCurrenciesDataMock';
 import searchDataMock from '../__mocks__/searchDataMock';
+import marketChartDataMock from '../__mocks__/marketChartDataMock';
 
 /* eslint-disable no-underscore-dangle */
 const { NOMICS_API_KEY } = process.env;
@@ -107,6 +109,19 @@ describe('API Routes', () => {
 
       expect(res._getStatusCode()).toBe(200);
       expect(JSON.parse(res._getData())).toEqual(expect.objectContaining(globalCurrencyDataMock));
+    });
+  });
+
+  describe('GET /api/market-chart', () => {
+    it('returns expected global data', async () => {
+      const { req, res } = createMocks({
+        method: 'GET',
+      });
+
+      await getMarketChartData(req, res);
+
+      expect(res._getStatusCode()).toBe(200);
+      expect(JSON.parse(res._getData())).toEqual(expect.objectContaining(marketChartDataMock));
     });
   });
 
@@ -352,6 +367,42 @@ describe('API Routes', () => {
       });
 
       await getCurrencyTicker(req, res);
+
+      expect(res._getStatusCode()).toBe(404);
+    });
+  });
+
+  describe('POST /api/market-chart', () => {
+    it('returns 404 for unsupported method', async () => {
+      const { req, res } = createMocks({
+        method: 'POST',
+      });
+
+      await getMarketChartData(req, res);
+
+      expect(res._getStatusCode()).toBe(404);
+    });
+  });
+
+  describe('DELETE /api/market-chart', () => {
+    it('returns 404 for unsupported method', async () => {
+      const { req, res } = createMocks({
+        method: 'DELETE',
+      });
+
+      await getMarketChartData(req, res);
+
+      expect(res._getStatusCode()).toBe(404);
+    });
+  });
+
+  describe('PUT /api/market-chart', () => {
+    it('returns 404 for unsupported method', async () => {
+      const { req, res } = createMocks({
+        method: 'PUT',
+      });
+
+      await getMarketChartData(req, res);
 
       expect(res._getStatusCode()).toBe(404);
     });

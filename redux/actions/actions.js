@@ -173,6 +173,30 @@ function getGlobalCurrencyData() {
   };
 }
 
+/* Get latest global currency data from endpoint */
+function getMarketChartData(id, localCurrency, days, interval) {
+  function request() {
+    return { type: types.GETMARKETCHARTDATA_REQUEST };
+  }
+  function success(marketChartData) {
+    return { type: types.GETMARKETCHARTDATA_SUCCESS, marketChartData };
+  }
+  function failure(error) {
+    return { type: types.GETMARKETCHARTDATA_FAILURE, error };
+  }
+
+  return (dispatch) => {
+    dispatch(request());
+
+    services.getMarketChartData(id, localCurrency, days, interval).then(
+      (data) => dispatch(success(data)),
+      (error) => {
+        dispatch(failure(error.toString()));
+      }
+    );
+  };
+}
+
 /* Search for currency data from endpoint */
 function search(query) {
   function request(term) {
@@ -257,6 +281,7 @@ const currencyActions = {
   getTopCurrencies,
   getTrendingCurrencies,
   getGlobalCurrencyData,
+  getMarketChartData,
   search,
   updateLocalCurrency,
   subscribeMailingList,

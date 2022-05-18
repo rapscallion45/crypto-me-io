@@ -133,6 +133,28 @@ const globalCurrencyDataReducer = (state = {}, action) => {
   }
 };
 
+// MARKET CHART DATA REDUCER
+const marketChartDataReducer = (state = {}, action) => {
+  switch (action.type) {
+    case types.GETMARKETCHARTDATA_REQUEST:
+      return {
+        loading: true,
+      };
+    case types.GETMARKETCHARTDATA_SUCCESS:
+      return {
+        data: action.marketChartData,
+        loaded: true,
+      };
+    case types.GETMARKETCHARTDATA_FAILURE:
+      return {
+        error: action.error,
+        loaded: false,
+      };
+    default:
+      return state;
+  }
+};
+
 // LOCAL CURRENCY REDUCER
 const localCurrencyReducer = (state = { currency: 'usd' }, action) => {
   switch (action.type) {
@@ -238,6 +260,7 @@ const reducers = {
   topCurrencies: topCurrenciesReducer,
   trendingCurrencies: trendingCurrenciesReducer,
   globalCurrencyData: globalCurrencyDataReducer,
+  marketChartData: marketChartDataReducer,
   localCurrency: localCurrencyReducer,
   subscribeMailingList: subscribeMailingListReducer,
   alert: alertReducer,

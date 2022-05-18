@@ -17,6 +17,7 @@ import CircSupplyDetails from '../../components/circ-supply-details';
 import VolumeDetails from '../../components/volume-details';
 import CurrencyCategoryTags from '../../components/currency-category-tags';
 import CurrencyBio from '../../components/currency-bio';
+import PriceChart from '../../components/price-chart';
 import Layout from '../../layouts/Layout/layout';
 import currencyActions from '../../redux/actions/actions';
 import numberWithCommas from '../../utils/numberWithCommas';
@@ -35,7 +36,9 @@ const CurrencyDetails = function CurrencyDetails() {
   const { id } = router.query;
 
   useEffect(() => {
-    if (id) dispatch(currencyActions.getCurrencyById(id));
+    if (id) {
+      dispatch(currencyActions.getCurrencyById(id));
+    }
   }, [id]);
 
   return (
@@ -146,6 +149,9 @@ const CurrencyDetails = function CurrencyDetails() {
                     <CurrencyCategoryTags data={data} />
                   </Grid>
                 </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <PriceChart currencyData={data} localCurrency={currency} />
               </Grid>
               {data?.description?.en && (
                 <Grid item xs={12}>

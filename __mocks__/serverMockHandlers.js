@@ -8,6 +8,7 @@ import trendingCurrenciesDataMock from './trendingCurrenciesDataMock';
 import currencyDataMock from './currencyDataMock';
 import allCurrenciesDataMock from './allCurrenciesDataMock';
 import searchDataMock from './searchDataMock';
+import marketChartDataMock from './marketChartDataMock';
 
 const { API_URL, CG_API_URL } = process.env;
 
@@ -64,6 +65,10 @@ const serverMockHandlers = [
   /* Test/mock get global currency data */
   rest.get(`${CG_API_URL}/global`, async (req, res, ctx) =>
     res(ctx.status(200), ctx.json(globalCurrencyDataMock))
+  ),
+  /* Test/mock get currency market data */
+  rest.get(`${CG_API_URL}/coins/:id/market_chart`, async (req, res, ctx) =>
+    res(ctx.status(200), ctx.json(marketChartDataMock))
   ),
   /* Test/mock subscribe to mailing list */
   rest.post(`https://reqres.in/api/users`, async (req, res, ctx) =>

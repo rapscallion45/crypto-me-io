@@ -90,6 +90,18 @@ function getGlobalCurrencyData() {
   return fetch(`/api/global`, requestOptions).then(handleResponse);
 }
 
+function getMarketChartData(id, localCurrency, days, interval) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  return fetch(
+    `/api/market-chart?id=${id}&vs_currency=${localCurrency}&days=${days}&interval=${interval}`,
+    requestOptions
+  ).then(handleResponse);
+}
+
 function search(query) {
   const requestOptions = {
     method: 'POST',
@@ -117,6 +129,7 @@ const services = {
   getTopCurrencies,
   getTrendingCurrencies,
   getGlobalCurrencyData,
+  getMarketChartData,
   search,
   subscribeMailingList,
 };
