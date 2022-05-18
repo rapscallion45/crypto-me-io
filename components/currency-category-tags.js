@@ -115,14 +115,13 @@ const CurrencyCategoryTags = function CurrencyCategoryTags({ data }) {
           </Box>
         </>
       )}
-      {!data?.categories.length ||
-        (data?.categories[0] === null && (
-          <Box my={2}>
-            <Typography variant="body" color="secondary">
-              N/A
-            </Typography>
-          </Box>
-        ))}
+      {(!data?.categories.length || data?.categories[0] === null) && (
+        <Box my={2}>
+          <Typography variant="body" color="secondary">
+            N/A
+          </Typography>
+        </Box>
+      )}
       <TagsDialog tags={data?.categories} open={open} onClose={handleClose} />
     </Box>
   );
