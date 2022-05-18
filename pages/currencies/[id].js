@@ -44,7 +44,7 @@ const CurrencyDetails = function CurrencyDetails() {
   return (
     <Page title={`CryptoMe.io | ${data?.name} Data`}>
       <Container maxWidth="lg">
-        <Box mt={12} mb={4}>
+        <Box mt={8} mb={4}>
           <Loader
             dataLoading={loading}
             dataError={error}
