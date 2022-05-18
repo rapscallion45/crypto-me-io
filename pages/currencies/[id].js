@@ -15,11 +15,13 @@ import CurrencyLinks from '../../components/currency-links';
 import MarketCapDetails from '../../components/mkt-cap-details';
 import CircSupplyDetails from '../../components/circ-supply-details';
 import VolumeDetails from '../../components/volume-details';
+import CurrencyCategoryTags from '../../components/currency-category-tags';
 import CurrencyBio from '../../components/currency-bio';
 import Layout from '../../layouts/Layout/layout';
 import currencyActions from '../../redux/actions/actions';
 import numberWithCommas from '../../utils/numberWithCommas';
 import LinearWithValueLabel from '../../components/linear-with-label';
+import getHiLoPercentageDiff from '../../utils/getHiLoPercentageDiff';
 
 const Alert = forwardRef((props, ref) => (
   <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
@@ -111,7 +113,11 @@ const CurrencyDetails = function CurrencyDetails() {
                   </Box>
                   <Box mb={4}>
                     <LinearWithValueLabel
-                      progress={50}
+                      progress={getHiLoPercentageDiff(
+                        data?.market_data?.high_24h[currency],
+                        data?.market_data?.low_24h[currency],
+                        data?.market_data?.current_price[currency]
+                      )}
                       minLabelText={`24h Low: ${getSymbolFromCurrency(currency)}${numberWithCommas(
                         data?.market_data?.low_24h[currency]
                       )}`}
@@ -135,6 +141,9 @@ const CurrencyDetails = function CurrencyDetails() {
                 <Grid container>
                   <Grid item xs={6}>
                     <VolumeDetails data={data} currency={currency} />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <CurrencyCategoryTags data={data} />
                   </Grid>
                 </Grid>
               </Grid>
