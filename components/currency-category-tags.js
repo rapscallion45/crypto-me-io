@@ -118,7 +118,7 @@ const CurrencyCategoryTags = function CurrencyCategoryTags({ data }) {
       {(!data?.categories.length || data?.categories[0] === null) && (
         <Box my={2}>
           <Typography variant="body" color="secondary">
-            N/A
+            --
           </Typography>
         </Box>
       )}

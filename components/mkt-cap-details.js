@@ -66,7 +66,7 @@ const MarketCapDetails = function MarketCapDetails({ data, currency }) {
               {`${getSymbolFromCurrency(currency)}${
                 numberWithCommas(
                   data?.market_data?.fully_diluted_valuation[currency]?.toFixed(0)
-                ) || 'N/A'
+                ) || '--'
               }`}
             </Typography>
           </Box>

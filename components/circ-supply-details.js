@@ -69,7 +69,7 @@ const CircSupplyDetails = function CircSupplyDetails({ data }) {
               paragraph
               sx={{ maxWidth: 200 }}
             >
-              {`${numberWithCommas(data?.market_data?.total_supply?.toFixed(0)) || 'N/A'}`}
+              {`${numberWithCommas(data?.market_data?.total_supply?.toFixed(0)) || '--'}`}
             </Typography>
           </Box>
         </Box>
