@@ -35,8 +35,8 @@ const CurrencyDetails = function CurrencyDetails() {
   const { id } = router.query;
 
   useEffect(() => {
-    dispatch(currencyActions.getCurrencyById(id));
-  }, []);
+    if (id) dispatch(currencyActions.getCurrencyById(id));
+  }, [id]);
 
   return (
     <Page title={`CryptoMe.io | ${data?.name} Data`}>
