@@ -98,10 +98,11 @@ const CurrencyCategoryTags = function CurrencyCategoryTags({ data }) {
                     <Chip
                       color="secondary"
                       label={
-                        <Typography noWrap sx={{ maxWidth: 160 }}>
+                        <Typography variant="body" noWrap sx={{ maxWidth: 160 }}>
                           {category}
                         </Typography>
                       }
+                      size="small"
                     />
                   </Box>
                 )
