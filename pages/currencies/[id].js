@@ -44,7 +44,7 @@ const CurrencyDetails = function CurrencyDetails() {
   return (
     <Page title={`CryptoMe.io | ${data?.name} Data`}>
       <Container maxWidth="lg">
-        <Box mt={5} mb={4}>
+        <Box mt={12} mb={4}>
           <Loader
             dataLoading={loading}
             dataError={error}
@@ -63,17 +63,17 @@ const CurrencyDetails = function CurrencyDetails() {
                 <Box display="flex" justifyContent="center">
                   <img src={data?.image.large} alt={data?.name} height={100} width={100} />
                   <Box display="flex" justifyContent="center" flexDirection="column" ml={3}>
-                    <Box display="flex" justifyContent="left">
+                    <Box mb={1} display="flex" justifyContent="left" sx={{ flexFlow: 'wrap' }}>
                       <Typography
                         variant="h3"
                         align="left"
                         color="secondary.main"
                         paragraph
-                        sx={{ maxWidth: 200 }}
+                        sx={{ maxWidth: 200, margin: 0, mr: 2 }}
                       >
                         {data?.name}
                       </Typography>
-                      <Box py={1} ml={2}>
+                      <Box py={1}>
                         <Chip
                           label={`${data?.symbol?.toUpperCase()}`}
                           color="secondary"

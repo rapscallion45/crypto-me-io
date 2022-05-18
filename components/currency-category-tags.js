@@ -103,6 +103,7 @@ const CurrencyCategoryTags = function CurrencyCategoryTags({ data }) {
                         </Typography>
                       }
                       size="small"
+                      sx={{ maxWidth: 160 }}
                     />
                   </Box>
                 )
