@@ -41,7 +41,7 @@ describe('Footer', () => {
   describe('Home link', () => {
     it('Should render link to homepage', () => {
       /* Arrange */
-      const linkText = 'MyCrypto.io';
+      const linkText = 'CryptoMe.io';
       const linkUrl = '/';
 
       /* Act */

@@ -14,7 +14,7 @@ const Copyright = function Copyright() {
     <Typography variant="body2" color="text.primary" align="center">
       {'Copyright © '}
       <Link color="primary.main" href="/" underline="none">
-        MyCrypto.io
+        CryptoMe.io
       </Link>
       <span>
         {` `}
