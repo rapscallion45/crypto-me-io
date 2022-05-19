@@ -2,13 +2,14 @@ import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Hero from '../components/hero';
 import Page from '../components/page';
-import Currencies from '../components/currencies';
+import CurrencyCarousel from '../components/currency-carousel';
+import CurrencyTable from '../components/currency-table';
 import Layout from '../layouts/Layout/layout';
 
 const Index = function Index() {
   return (
     <Page title="CryptoMe.io | Home">
-      <Container maxWidth="lg">
+      <Container disableGutters maxWidth="lg">
         <Box
           mt={5}
           mb={4}
@@ -19,7 +20,12 @@ const Index = function Index() {
         >
           <Hero />
         </Box>
-        <Currencies />
+        <Box mt={12} mb={12} sx={{ minHeight: 150 }}>
+          <CurrencyCarousel />
+        </Box>
+        <Box mt={12} mb={12}>
+          <CurrencyTable />
+        </Box>
       </Container>
     </Page>
   );

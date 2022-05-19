@@ -7,11 +7,13 @@ const Meta = function Meta() {
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
       <link rel="manifest" href="/favicon/site.webmanifest" />
-      <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#009EE3" />
-      <link rel="icon" href="/favicon/favicon.ico" />
-      <meta name="msapplication-TileColor" content="#009EE3" />
+      <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#0033e7" />
+      <meta name="msapplication-TileColor" content="#0033e7" />
+      <meta name="theme-color" content="#0033e7" />
+      <link rel="icon" href="/images/favicon.ico" />
+      <meta name="msapplication-TileColor" color="#0033e7" />
       <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
-      <meta name="theme-color" content="#009EE3" />
+      <meta name="theme-color" color="#0033e7" />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
       <link
@@ -19,11 +21,6 @@ const Meta = function Meta() {
         rel="stylesheet"
       />
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-      <link href="/css/hamburgers.css" rel="stylesheet" />
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css"
-      />
     </Head>
   );
 };

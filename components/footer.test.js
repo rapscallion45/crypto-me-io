@@ -2,13 +2,19 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { render } from '@testing-library/react';
 import toJson from 'enzyme-to-json';
+import createEmotionCache from '../utils/createEmotionCache';
+import ThemeConfig from '../theme/ThemeConfig';
 import Footer from './footer';
 
 describe('Footer', () => {
   it('Renders correctly enzyme', () => {
     /* Arrange */
     /* Act */
-    const wrapper = shallow(<Footer />);
+    const wrapper = shallow(
+      <ThemeConfig emotionCache={createEmotionCache()}>
+        <Footer />
+      </ThemeConfig>
+    );
 
     /* Assert */
     expect(toJson(wrapper)).toMatchSnapshot();
@@ -21,21 +27,29 @@ describe('Footer', () => {
       const date = today.getFullYear();
 
       /* Act */
-      const wrapper = render(<Footer />);
+      const wrapper = render(
+        <ThemeConfig emotionCache={createEmotionCache()}>
+          <Footer />
+        </ThemeConfig>
+      );
 
       /* Assert */
       expect(wrapper.getByText(date)).toBeInTheDocument();
     });
   });
 
-  describe('Linkedin link', () => {
-    it('Should render link to Linkedin profile', () => {
+  describe('Home link', () => {
+    it('Should render link to homepage', () => {
       /* Arrange */
-      const linkText = 'Carl Scrivener';
-      const linkUrl = 'https://www.linkedin.com/in/carlscrivener/';
+      const linkText = 'CryptoMe.io';
+      const linkUrl = '/';
 
       /* Act */
-      const wrapper = render(<Footer />);
+      const wrapper = render(
+        <ThemeConfig emotionCache={createEmotionCache()}>
+          <Footer />
+        </ThemeConfig>
+      );
 
       /* Assert */
       expect(wrapper.getByText(linkText).closest('a')).toHaveAttribute('href', linkUrl);

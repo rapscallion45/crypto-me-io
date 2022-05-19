@@ -6,10 +6,14 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from './link';
 
-const BoxStyle = styled(Box)(() => ({
+const BoxStyle = styled(Box)(({ theme }) => ({
   marginTop: '7px',
-  width: 400,
-  height: 210,
+  maxWidth: 300,
+  height: 160,
+  [theme.breakpoints.up('sm')]: {
+    maxWidth: 500,
+    height: 210,
+  },
 }));
 
 const Hero = function Hero() {
@@ -20,11 +24,11 @@ const Hero = function Hero() {
       </Box>
 
       <Typography variant="h3" align="center" color="secondary.main" paragraph>
-        Track, buy and sell your crypto with ease!
+        Find and track all your favourite cryptos with ease!
       </Typography>
       <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-        <Button variant="contained" component={Link} href="/register">
-          Create Account
+        <Button variant="contained" component={Link} href="/currencies/all">
+          View Currencies
         </Button>
       </Stack>
     </Container>

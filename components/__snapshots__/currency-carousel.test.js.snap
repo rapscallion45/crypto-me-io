@@ -24,6 +24,6 @@ exports[`Users Renders correctly enzyme 1`] = `
     }
   }
 >
-  <Currencies />
+  <CurrencyCarousel />
 </ContextProvider>
 `;

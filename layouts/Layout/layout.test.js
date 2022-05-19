@@ -31,6 +31,12 @@ jest.mock('next/router', () => ({
   },
 }));
 
+jest.mock('../../hooks/useNotifier', () =>
+  jest.fn(() => ({
+    notifications: {},
+  }))
+);
+
 describe('Layout', () => {
   it('Renders correctly enzyme', () => {
     /* Arrange */

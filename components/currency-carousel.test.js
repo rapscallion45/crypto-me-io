@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import router from 'next/router';
 import rootReducer from '../redux/reducers/reducers';
-import Currencies from './currencies';
+import CurrencyCarousel from './currency-carousel';
 
 const middleware = [thunkMiddleware];
 
@@ -50,7 +50,7 @@ describe('Users', () => {
     /* Act */
     const wrapper = shallow(
       <Provider store={testStore}>
-        <Currencies />
+        <CurrencyCarousel />
       </Provider>
     );
 
