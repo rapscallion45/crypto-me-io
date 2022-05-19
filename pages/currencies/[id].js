@@ -17,6 +17,7 @@ import CircSupplyDetails from '../../components/circ-supply-details';
 import VolumeDetails from '../../components/volume-details';
 import CurrencyCategoryTags from '../../components/currency-category-tags';
 import CurrencyBio from '../../components/currency-bio';
+import CurrencyStats from '../../components/currency-stats';
 import PriceChart from '../../components/price-chart';
 import Layout from '../../layouts/Layout/layout';
 import currencyActions from '../../redux/actions/actions';
@@ -43,7 +44,7 @@ const CurrencyDetails = function CurrencyDetails() {
 
   return (
     <Page title={`CryptoMe.io | ${data?.name} Data`}>
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Box mt={8} mb={4}>
           <Loader
             dataLoading={loading}
@@ -151,7 +152,14 @@ const CurrencyDetails = function CurrencyDetails() {
                 </Grid>
               </Grid>
               <Grid item xs={12}>
-                <PriceChart currencyData={data} localCurrency={currency} />
+                <Grid container spacing={2}>
+                  <Grid item xs={12} lg={8}>
+                    <PriceChart currencyData={data} localCurrency={currency} />
+                  </Grid>
+                  <Grid item xs={12} lg={4}>
+                    <CurrencyStats data={data} localCurrency={currency} />
+                  </Grid>
+                </Grid>
               </Grid>
               {data?.description?.en && (
                 <Grid item xs={12}>

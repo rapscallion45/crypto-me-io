@@ -15,11 +15,11 @@ const CurrencyBio = function CurrencyBio({ data }) {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h4" color="primary.main" paragraph>
-          Bio:
+        <Typography variant="h5" color="text.main" paragraph>
+          {`About ${data?.name}`}
         </Typography>
         <Collapse in={expanded} timeout="auto" collapsedSize="80px">
-          <Typography variant="body" paragraph color="primary">
+          <Typography variant="body2" paragraph color="text.main">
             {data && parse(data?.description?.en)}
           </Typography>
         </Collapse>

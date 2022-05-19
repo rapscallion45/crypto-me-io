@@ -6,7 +6,6 @@ import { format } from 'd3-format';
 import { timeFormat } from 'd3-time-format';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
@@ -114,57 +113,43 @@ const PriceChart = function PriceChart({ currencyData, localCurrency }) {
   };
 
   return (
-    <Box mt={3}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Card>
-            <CardHeader
-              title={`${
-                currencyData?.name
-              } to ${localCurrency?.toUpperCase()} Chart (${currencyData?.symbol?.toUpperCase()})`}
-            />
-            <Box display="flex" sx={{ flexWrap: 'wrap' }}>
-              <Box display="flex" my={1} mx={3} sx={{ flexGrow: 1 }}>
-                <PriceChartTypeSelect initialValue={chartType} onUpdate={handleChartTypeUpdate} />
-              </Box>
-              <Box display="flex" justifyContent="end" my={1} mx={3} sx={{ flexGrow: 1 }}>
-                <PriceChartRangeSelect
-                  initialValue={chartRange}
-                  onUpdate={handleChartRangeUpdate}
-                />
-              </Box>
+    <Card>
+      <CardHeader
+        title={`${
+          currencyData?.name
+        } to ${localCurrency?.toUpperCase()} Chart (${currencyData?.symbol?.toUpperCase()})`}
+      />
+      <Box display="flex" sx={{ flexWrap: 'wrap' }}>
+        <Box display="flex" my={1} mx={3} sx={{ flexGrow: 1 }}>
+          <PriceChartTypeSelect initialValue={chartType} onUpdate={handleChartTypeUpdate} />
+        </Box>
+        <Box display="flex" justifyContent="end" my={1} mx={3} sx={{ flexGrow: 1 }}>
+          <PriceChartRangeSelect initialValue={chartRange} onUpdate={handleChartRangeUpdate} />
+        </Box>
+      </Box>
+      <Box display="flex" justifyContent="center" alignItems="center" sx={{ minHeight: 410 }}>
+        <Loader
+          dataLoading={loading}
+          dataLoaded={loaded}
+          dataError={error}
+          loadingText="Loading market data..."
+          errorText="Failed to load market data."
+        >
+          {chartData?.length !== 0 && (
+            <Box sx={{ width: '100%', p: 3, pb: 1 }} dir="ltr">
+              <ReactApexChart type="line" series={chartData} options={chartOptions} height={364} />
             </Box>
-            <Box display="flex" justifyContent="center" alignItems="center" sx={{ minHeight: 410 }}>
-              <Loader
-                dataLoading={loading}
-                dataLoaded={loaded}
-                dataError={error}
-                loadingText="Loading market data..."
-                errorText="Failed to load market data."
-              >
-                {chartData?.length !== 0 && (
-                  <Box sx={{ width: '100%', p: 3, pb: 1 }} dir="ltr">
-                    <ReactApexChart
-                      type="line"
-                      series={chartData}
-                      options={chartOptions}
-                      height={364}
-                    />
-                  </Box>
-                )}
-                {!chartData?.length && (
-                  <Box sx={{ padding: '25px' }}>
-                    <Typography variant="body" component="p">
-                      No data to show yet - check back once the season is underway.
-                    </Typography>
-                  </Box>
-                )}
-              </Loader>
+          )}
+          {!chartData?.length && (
+            <Box sx={{ padding: '25px' }}>
+              <Typography variant="body" component="p">
+                No data to show yet - check back once the season is underway.
+              </Typography>
             </Box>
-          </Card>
-        </Grid>
-      </Grid>
-    </Box>
+          )}
+        </Loader>
+      </Box>
+    </Card>
   );
 };
 export default PriceChart;
